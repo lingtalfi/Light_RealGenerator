@@ -82,6 +82,10 @@ Related
 History Log
 =============
 
+- 1.0.2 -- 2019-10-25
+
+    - add onGenerateAfter method
+    
 - 1.0.1 -- 2019-10-25
 
     - add link to README.md

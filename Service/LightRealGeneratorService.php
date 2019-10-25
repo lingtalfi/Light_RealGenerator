@@ -69,6 +69,9 @@ class LightRealGeneratorService
             }
 
 
+            $this->onGenerateAfter($genConf);
+
+
         } else {
             $this->error("Identifier not found: $identifier, in $file.");
         }
@@ -103,5 +106,17 @@ class LightRealGeneratorService
     protected function error(string $msg)
     {
         throw new LightRealGeneratorException($msg);
+    }
+
+
+    /**
+     * Hook called at the end of the @page(generate method).
+     *
+     * @param array $configBlock
+     * @overrideMe
+     */
+    protected function onGenerateAfter(array $configBlock)
+    {
+
     }
 }
