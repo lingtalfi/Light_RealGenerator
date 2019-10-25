@@ -32,6 +32,7 @@ Summary
 - [Related](#related)
 - Pages
     - [Conception notes](https://github.com/lingtalfi/Light_RealGenerator/blob/master/doc/pages/conception-notes.md)
+    - [Configuration block](https://github.com/lingtalfi/Light_RealGenerator/blob/master/doc/pages/realgen-configuration-block.md)
 
 
 
@@ -81,6 +82,10 @@ Related
 History Log
 =============
 
+- 1.0.1 -- 2019-10-25
+
+    - add link to README.md
+    
 - 1.0.0 -- 2019-10-24
 
     - initial commit
