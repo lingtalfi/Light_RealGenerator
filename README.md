@@ -82,6 +82,10 @@ Related
 History Log
 =============
 
+- 1.1.0 -- 2019-10-30
+
+    - update ListConfigGenerator, now includes use_micro_permission entry
+    
 - 1.0.2 -- 2019-10-25
 
     - add onGenerateAfter method

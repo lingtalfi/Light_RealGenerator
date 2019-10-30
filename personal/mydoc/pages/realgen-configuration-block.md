@@ -19,7 +19,10 @@ main:
     # - as a prefix of the rendering.list_general_actions.action_id (list)
     # - as a prefix of the rendering.list_action_groups.action_id (list)
     # - as the plugin name in rendering.list_renderer.identifier (list)
+    # - as the plugin name in plugin (described in the miscellaneous "section" of the realist conception notes)
     plugin_name: Light_Kit_Admin
+
+
     # This section defines the table to generate configuration files for.
     # It's composed of two sections: add and remove.
     tables:
@@ -47,6 +50,12 @@ main:
         # It's an absolute path.
         # The tag {app_dir} can be used, and will be replaced with the actual "application root directory".
         target_dir: {app_dir}/config/data/Light_Kit_Admin/Light_Realist/generated
+
+
+        # Bool=true, whether to add the use_micro_permission setting in the request declaration.
+        # See the miscellaneous section of the realist conception notes for more details:
+        # https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/realist-conception-notes.md#miscellaneous
+        ?use_micro_permission: true
 
         # Whether to use the action column (added to every row). Defaults to true.
         ?use_action_column: true

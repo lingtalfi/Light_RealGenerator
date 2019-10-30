@@ -58,6 +58,7 @@ class ListConfigGenerator extends BaseConfigGenerator
         $main['table'] = $table;
         $database = $this->getKeyValue('database_name', false, null);
         $pluginName = $this->getKeyValue('plugin_name');
+        $useMicroPermission = $this->getKeyValue('list.use_micro_permission', false, true);
         $ignoreColumns = $this->getKeyValue("list.ignore_columns.$table", false, []);
         $globalIgnoreColumns = $this->getKeyValue("ignore_columns.$table", false, []);
         $useActionColumn = $this->getKeyValue("list.use_action_column", false, true);
@@ -69,7 +70,6 @@ class ListConfigGenerator extends BaseConfigGenerator
         $rowsRendererTypeAliases = $this->getKeyValue("list.rows_renderer_type_aliases", false, []);
         $rowsRendererTypesGeneral = $this->getKeyValue("list.rows_renderer_types_general", false, []);
         $rowsRendererTypesSpecific = $this->getKeyValue("list.rows_renderer_types_specific.$table", false, []);
-
 
 
         $ignoreColumns = array_unique(array_merge($globalIgnoreColumns, $ignoreColumns));
@@ -148,12 +148,14 @@ class ListConfigGenerator extends BaseConfigGenerator
 
 
             //--------------------------------------------
-            // CSRF_TOKEN
+            // MISCELLANEOUS
             //--------------------------------------------
+            $main['plugin'] = $pluginName;
             $main['csrf_token'] = [
                 "name" => 'realist-request',
                 "value" => 'REALIST(Light_Realist, csrf_token, realist-request)',
             ];
+            $main['use_micro_permission'] = $useMicroPermission;
 
 
             //--------------------------------------------
