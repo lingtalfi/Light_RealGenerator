@@ -173,8 +173,12 @@ main:
             lud_user:
                 - pseudo
 
-
-
+        # Array, defines how the on_success_handler section (of the realform config file) is generated.
+        ?on_success_handler:
+            # string, defines the type of success handler
+            # The available values are:
+            # - database
+            type: database
 
 
 

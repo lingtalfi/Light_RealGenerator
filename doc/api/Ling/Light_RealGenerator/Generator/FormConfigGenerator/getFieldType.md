@@ -56,7 +56,7 @@ Exceptions thrown
 
 Source Code
 ===========
-See the source code for method [FormConfigGenerator::getFieldType](https://github.com/lingtalfi/Light_RealGenerator/blob/master/Generator/FormConfigGenerator.php#L153-L193)
+See the source code for method [FormConfigGenerator::getFieldType](https://github.com/lingtalfi/Light_RealGenerator/blob/master/Generator/FormConfigGenerator.php#L201-L241)
 
 
 See Also

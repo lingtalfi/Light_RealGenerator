@@ -4,6 +4,7 @@
 namespace Ling\Light_RealGenerator\Generator;
 
 
+use Ling\ArrayVariableResolver\ArrayVariableResolverUtil;
 use Ling\BabyYaml\BabyYamlUtil;
 use Ling\Bat\FileSystemTool;
 use Ling\Light_DatabaseInfo\Service\LightDatabaseInfoService;
@@ -55,13 +56,27 @@ class FormConfigGenerator extends BaseConfigGenerator
         $arr = [];
 
 
+        $pluginName = $this->getKeyValue('plugin_name');
         $database = $this->getKeyValue('database_name', false, null);
         $formHandlerClassGeneral = $this->getKeyValue("form.form_handler_class_general", false, null);
         $formHandlerClassSpecific = $this->getKeyValue("form.form_handler_class_specific.$table", false, null);
         $globalIgnoreColumns = $this->getKeyValue("ignore_columns.$table", false, []);
         $ignoreColumns = $this->getKeyValue("form.ignore_columns.$table", false, []);
-        $customFields = $this->getKeyValue("form.ignore_columns.$table", false, []);
+        $customFields = $this->getKeyValue("form.fields.$table", false, []);
         $notRequiredCols = $this->getKeyValue("form.not_required.$table", false, []);
+        $customVariables = $this->getKeyValue("form.variables", false, []);
+        $fieldsMergeAliases = $this->getKeyValue("form.fields_merge_aliases", false, []);
+        $fieldsMergeSpecific = $this->getKeyValue("form.fields_merge_specific.$table", false, []);
+        $onSuccessHandler = $this->getKeyValue("form.on_success_handler", false, []);
+        $onSuccessHandlerType = $onSuccessHandler['type'] ?? "database";
+
+
+        $theVariables = $customVariables;
+        $theVariables['table'] = $table;
+        $theVariables['field'] = "";
+
+        $variableResolver = new ArrayVariableResolverUtil();
+        $variableResolver->setFirstSymbol('');
 
 
         $ignoreColumns = array_unique(array_merge($globalIgnoreColumns, $ignoreColumns));
@@ -95,10 +110,24 @@ class FormConfigGenerator extends BaseConfigGenerator
         $fields = [];
         foreach ($columns as $col) {
 
-
-            $customItem = $customFields[$col] ?? [];
-
             if (array_key_exists($col, $types)) {
+
+
+                $theVariables['field'] = $col;
+
+                $customItem = $customFields[$col] ?? [];
+                $merge = [];
+                if (array_key_exists($col, $fieldsMergeSpecific)) {
+                    $mergeArr = $fieldsMergeSpecific[$col];
+                    if (is_string($mergeArr) && '$' === substr($mergeArr, 0, 1)) {
+                        $alias = substr($mergeArr, 1);
+                        $merge = $this->getKeyValue("form.fields_merge_aliases.$alias");
+                    } else {
+                        // assuming it's an array
+                        $merge = $mergeArr;
+                    }
+                }
+
 
                 $sqlType = $types[$col];
                 $type = $this->getFieldType($sqlType);
@@ -116,7 +145,12 @@ class FormConfigGenerator extends BaseConfigGenerator
                     'validators' => $validators,
                 ];
 
-                $fieldItem = array_merge_recursive($fieldItem, $customItem);
+                // note: merge is less specific than custom item
+                $fieldItem = array_replace_recursive($fieldItem, $merge, $customItem);
+
+                $variableResolver->resolve($fieldItem, $theVariables);
+
+
                 $fields[$col] = $fieldItem;
 
 
@@ -133,8 +167,22 @@ class FormConfigGenerator extends BaseConfigGenerator
         //--------------------------------------------
         // ON SUCCESS HANDLER
         //--------------------------------------------
-        // not used yet...
-//        $arr['on_success_handler'] = '';
+        $onSuccessHandlerArr = [];
+        switch ($onSuccessHandlerType) {
+            case "database":
+                $onSuccessHandlerArr = [
+                    "type" => "database",
+                    "params" => [
+                        "table" => $table,
+                        "microPermissionPluginName" => $pluginName
+                    ],
+                ];
+                break;
+            default:
+                throw new LightRealGeneratorException("Unknown success handler type: $onSuccessHandlerType.");
+                break;
+        }
+        $arr['on_success_handler'] = $onSuccessHandlerArr;
 
         return BabyYamlUtil::getBabyYamlString($arr);
     }

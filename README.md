@@ -82,6 +82,10 @@ Related
 History Log
 =============
 
+- 1.2.0 -- 2019-11-04
+
+    - update FormConfigGenerator, now handles on_success_handler
+
 - 1.1.0 -- 2019-10-30
 
     - update ListConfigGenerator, now includes use_micro_permission entry
