@@ -82,6 +82,10 @@ Related
 History Log
 =============
 
+- 1.3.0 -- 2019-11-04
+
+    - update FormConfigGenerator, now handles fields_merge_aliases
+    
 - 1.2.0 -- 2019-11-04
 
     - update FormConfigGenerator, now handles on_success_handler

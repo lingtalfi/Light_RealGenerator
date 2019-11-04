@@ -167,6 +167,39 @@ main:
                 pseudo:
                     label: the Pseudo
 
+        # An array of aliasName => partialFieldItem,
+        # with partialFieldItem being an array containing field item parts.
+        # The partialFieldItems defined in this array can be referenced in other parts of the configuration:
+        # - fields_merge_specific
+
+        # Using aliases tends to reduce the verbosity of this file.
+        #
+        # The values of the partialFieldItem can use variables (aka tags).
+        # The notation for a variable is defined in the variables section (see the variables section for more info).
+        # The available variables are also defined there.
+        fields_merge_aliases:
+            ajax1:
+                type: ajaxFileBox
+                maxFile: 1
+                maxFileSize: null
+                mimeType: null
+                postParams:
+                    id: {plugin_prefix}-{table}-{field}
+                    csrf_token: REALGEN(crsf, realGen-ajaxform-{table}-{field})
+                validators:
+                    validUserDataUrl: []
+
+        # Use this array to merge a field item with custom defined properties, based on a specific table and field.
+        # It's an array of table => items,
+        # with items being an array of field => partialItem,
+        # with partialItem being either:
+        # - an array of one ore more field items entries to merge with the target field item
+        # - or an alias to such an array. To use an alias, prefix the alias name with the dollar symbol ($).
+        # For more info about aliases, see the field_merge_aliases section.
+        fields_merge_specific:
+            lud_user:
+                avatar_url: $ajax1
+
         # An array of table => notRequiredFields, with notRequiredFields being an array of the fields for which you don't
         # want a required validator to be set automatically.
         ?not_required:

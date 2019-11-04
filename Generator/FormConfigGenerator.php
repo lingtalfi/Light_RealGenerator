@@ -65,7 +65,6 @@ class FormConfigGenerator extends BaseConfigGenerator
         $customFields = $this->getKeyValue("form.fields.$table", false, []);
         $notRequiredCols = $this->getKeyValue("form.not_required.$table", false, []);
         $customVariables = $this->getKeyValue("form.variables", false, []);
-        $fieldsMergeAliases = $this->getKeyValue("form.fields_merge_aliases", false, []);
         $fieldsMergeSpecific = $this->getKeyValue("form.fields_merge_specific.$table", false, []);
         $onSuccessHandler = $this->getKeyValue("form.on_success_handler", false, []);
         $onSuccessHandlerType = $onSuccessHandler['type'] ?? "database";
