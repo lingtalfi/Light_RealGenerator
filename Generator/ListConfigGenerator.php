@@ -73,6 +73,9 @@ class ListConfigGenerator extends BaseConfigGenerator
         $rowsRendererTypesGeneral = $this->getKeyValue("list.rows_renderer_types_general", false, []);
         $rowsRendererTypesSpecific = $this->getKeyValue("list.rows_renderer_types_specific.$table", false, []);
         $relatedLinks = $this->getKeyValue("list.related_links", false, []);
+        $listTitle = $this->getKeyValue("list.title", false, "{Label} list");
+
+
         $ignoreColumns = array_unique(array_merge($globalIgnoreColumns, $ignoreColumns));
         /**
          * @var $dbInfo LightDatabaseInfoService
@@ -86,16 +89,9 @@ class ListConfigGenerator extends BaseConfigGenerator
         $main['base_fields'] = $columns;
 
 
-        $tableNoPrefix = $this->getTableWithoutPrefix($table);
-        $tableLabel = str_replace("_", " ", $tableNoPrefix);
-        $tableLabelUcFirst = ucfirst($tableLabel);
-        $relatedLinksTags = [
-            '{label}' => $tableLabel,
-            '{Label}' => $tableLabelUcFirst,
-            '{table}' => $table,
-            '{TableClass}' => CaseTool::toPascal($table),
-        ];
-        $relatedLinks = ArrayTool::replaceRecursive($relatedLinksTags, $relatedLinks);
+        $genericTags = $this->getGenericTagsByTable($table);
+        ArrayTool::replaceRecursive($genericTags, $relatedLinks);
+        $listTitle = str_replace(array_keys($genericTags), array_values($genericTags), $listTitle);
 
 
 
@@ -304,6 +300,7 @@ class ListConfigGenerator extends BaseConfigGenerator
 
 
             $main['rendering'] = [
+                "title" => $listTitle,
                 "list_general_actions" => $listGeneralActions,
                 "list_action_groups" => $listActionGroups,
                 "list_renderer" => [
@@ -450,22 +447,4 @@ class ListConfigGenerator extends BaseConfigGenerator
         });
     }
 
-
-    /**
-     * Returns the table name without prefix.
-     *
-     * @param string $table
-     * @return string
-     * @throws \Exception
-     */
-    protected function getTableWithoutPrefix(string $table): string
-    {
-        $prefixes = $this->getKeyValue("table_prefixes", false, []);
-        foreach ($prefixes as $prefix) {
-            if (0 === strpos($table, $prefix)) {
-                return substr($table, strlen($prefix . "_"));
-            }
-        }
-        return $table;
-    }
 }

@@ -82,6 +82,10 @@ Related
 History Log
 =============
 
+- 1.6.0 -- 2019-11-05
+
+    - update, add form.title and list.title properties
+    
 - 1.5.0 -- 2019-11-05
 
     - update ListConfigGenerator, now accepts {TableClass} tag

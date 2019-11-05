@@ -5,6 +5,7 @@ namespace Ling\Light_RealGenerator\Generator;
 
 
 use Ling\Bat\BDotTool;
+use Ling\Bat\CaseTool;
 use Ling\Light\ServiceContainer\LightServiceContainerInterface;
 use Ling\Light_DatabaseInfo\Service\LightDatabaseInfoService;
 use Ling\Light_RealGenerator\Exception\LightRealGeneratorException;
@@ -131,6 +132,45 @@ class BaseConfigGenerator
     protected function setConfig(array $config)
     {
         $this->config = $config;
+    }
+
+
+    /**
+     * Returns the array of generic tags (used in the list and form configuration files), based on the given table.
+     *
+     * @param string $table
+     * @return array
+     * @throws \Exception
+     */
+    protected function getGenericTagsByTable(string $table): array
+    {
+        $tableNoPrefix = $this->getTableWithoutPrefix($table);
+        $tableLabel = str_replace("_", " ", $tableNoPrefix);
+        $tableLabelUcFirst = ucfirst($tableLabel);
+        return [
+            '{label}' => $tableLabel,
+            '{Label}' => $tableLabelUcFirst,
+            '{table}' => $table,
+            '{TableClass}' => CaseTool::toPascal($table),
+        ];
+    }
+
+    /**
+     * Returns the table name without prefix.
+     *
+     * @param string $table
+     * @return string
+     * @throws \Exception
+     */
+    protected function getTableWithoutPrefix(string $table): string
+    {
+        $prefixes = $this->getKeyValue("table_prefixes", false, []);
+        foreach ($prefixes as $prefix) {
+            if (0 === strpos($table, $prefix)) {
+                return substr($table, strlen($prefix . "_"));
+            }
+        }
+        return $table;
     }
 
 }

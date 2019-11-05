@@ -6,6 +6,7 @@ namespace Ling\Light_RealGenerator\Generator;
 
 use Ling\ArrayVariableResolver\ArrayVariableResolverUtil;
 use Ling\BabyYaml\BabyYamlUtil;
+use Ling\Bat\ArrayTool;
 use Ling\Bat\FileSystemTool;
 use Ling\Light_DatabaseInfo\Service\LightDatabaseInfoService;
 use Ling\Light_RealGenerator\Exception\LightRealGeneratorException;
@@ -67,8 +68,14 @@ class FormConfigGenerator extends BaseConfigGenerator
         $customVariables = $this->getKeyValue("form.variables", false, []);
         $fieldsMergeSpecific = $this->getKeyValue("form.fields_merge_specific.$table", false, []);
         $onSuccessHandler = $this->getKeyValue("form.on_success_handler", false, []);
+        $formTitle = $this->getKeyValue("form.title", false, "{Label} form");
         $onSuccessHandlerType = $onSuccessHandler['type'] ?? "database";
 
+
+
+        $genericTags = $this->getGenericTagsByTable($table);
+        $formTitle = str_replace(array_keys($genericTags), array_values($genericTags), $formTitle);
+        $arr['title'] = $formTitle;
 
         $theVariables = $customVariables;
         $theVariables['table'] = $table;
@@ -161,6 +168,7 @@ class FormConfigGenerator extends BaseConfigGenerator
 
 
         $arr['form_handler'] = $formHandler;
+
 
 
         //--------------------------------------------

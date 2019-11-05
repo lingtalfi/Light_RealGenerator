@@ -52,6 +52,12 @@ main:
             - password
 
     # This section defines the behaviour of the list configuration file generator
+    # The term generic tags, used in some of the definitions below, refers to the following array:
+    # - {label}, the human name derived from the table name (using internal heuristics)
+    # - {Label}, same as label, but with first letter uppercase
+    # - {table}, the table name
+    # - {TableClass}, the table name in pascal case (i.e. class name case).
+    #       More info about pascal case here: https://github.com/lingtalfi/ConventionGuy/blob/master/nomenclature.stringCases.eng.md#pascalcase
     list:
 
         # The target_dir is the path of the dir where to generate the files
@@ -59,6 +65,11 @@ main:
         # The tag {app_dir} can be used, and will be replaced with the actual "application root directory".
         target_dir: {app_dir}/config/data/Light_Kit_Admin/Light_Realist/generated
 
+        # The title of the list, defaults to:
+        # - {label} list
+        # The generic tags (see the list description comment) can be used to replace some part of the title by
+        # dynamic values.
+        ?title: {label} list
 
         # Bool=true, whether to add the use_micro_permission setting in the request declaration.
         # See the miscellaneous section of the realist conception notes for more details:
@@ -141,12 +152,7 @@ main:
         # - text: string
         # - url: string
         # - icon: string
-        # In the property values, the following tags are available:
-        # - {label}, the human name derived from the table name (using internal heuristics)
-        # - {Label}, same as label, but with first letter uppercase
-        # - {table}, the table name
-        # - {TableClass}, the table name in pascal case (i.e. class name case).
-        #       More info about pascal case here: https://github.com/lingtalfi/ConventionGuy/blob/master/nomenclature.stringCases.eng.md#pascalcase
+        # In the property values, you can use the generic tags (described in the list section comment).
         ?related_links:
             -
                 text: Add new {label}
@@ -163,6 +169,12 @@ main:
         # It's an absolute path.
         # The tag {app_dir} can be used, and will be replaced with the actual "application root directory".
         target_dir: {app_dir}/config/data/Light_Kit_Admin/Light_Realform/generated
+
+        # The title of the form, defaults to:
+        # - {Label} form
+        # The generic tags (see the list description comment) can be used to replace some part of the title by
+        # dynamic values.
+        title: {Label} form
 
 
         # This array let you ignore/skip columns that you want to exclude from the generated form config file.
