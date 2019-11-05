@@ -82,7 +82,7 @@ class ListConfigGenerator extends BaseConfigGenerator
 
         $main['ric'] = $tableInfo['ric'];
         $columns = array_merge(array_diff($tableInfo['columns'], $ignoreColumns));
-        $main['fields'] = $columns;
+        $main['base_fields'] = $columns;
 
 
         if ('openAdminOne') {

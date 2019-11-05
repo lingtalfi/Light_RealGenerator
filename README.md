@@ -82,6 +82,10 @@ Related
 History Log
 =============
 
+- 1.3.1 -- 2019-11-05
+
+    - fix ListConfigGenerator generating fields instead of base_fields
+
 - 1.3.0 -- 2019-11-04
 
     - update FormConfigGenerator, now handles fields_merge_aliases
