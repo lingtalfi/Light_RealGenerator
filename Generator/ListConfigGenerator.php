@@ -6,6 +6,7 @@ namespace Ling\Light_RealGenerator\Generator;
 
 use Ling\BabyYaml\BabyYamlUtil;
 use Ling\Bat\ArrayTool;
+use Ling\Bat\CaseTool;
 use Ling\Bat\FileSystemTool;
 use Ling\Light_DatabaseInfo\Service\LightDatabaseInfoService;
 use Ling\Light_RealGenerator\Exception\LightRealGeneratorException;
@@ -92,6 +93,7 @@ class ListConfigGenerator extends BaseConfigGenerator
             '{label}' => $tableLabel,
             '{Label}' => $tableLabelUcFirst,
             '{table}' => $table,
+            '{TableClass}' => CaseTool::toPascal($table),
         ];
         $relatedLinks = ArrayTool::replaceRecursive($relatedLinksTags, $relatedLinks);
 

@@ -145,6 +145,8 @@ main:
         # - {label}, the human name derived from the table name (using internal heuristics)
         # - {Label}, same as label, but with first letter uppercase
         # - {table}, the table name
+        # - {TableClass}, the table name in pascal case (i.e. class name case).
+        #       More info about pascal case here: https://github.com/lingtalfi/ConventionGuy/blob/master/nomenclature.stringCases.eng.md#pascalcase
         ?related_links:
             -
                 text: Add new {label}
