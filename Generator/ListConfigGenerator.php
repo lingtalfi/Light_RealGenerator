@@ -458,7 +458,7 @@ class ListConfigGenerator extends BaseConfigGenerator
      */
     protected function getTableWithoutPrefix(string $table): string
     {
-        $prefixes = $this->getKeyValue("prefixes", false, []);
+        $prefixes = $this->getKeyValue("table_prefixes", false, []);
         foreach ($prefixes as $prefix) {
             if (0 === strpos($table, $prefix)) {
                 return substr($table, strlen($prefix . "_"));

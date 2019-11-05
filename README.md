@@ -82,6 +82,10 @@ Related
 History Log
 =============
 
+- 1.4.1 -- 2019-11-05
+
+    - fix functional typo in ListConfigGenerator
+    
 - 1.4.0 -- 2019-11-05
 
     - update ListConfigGenerator, now handles the related_links section
