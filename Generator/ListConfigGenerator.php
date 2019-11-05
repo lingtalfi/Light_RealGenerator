@@ -5,6 +5,7 @@ namespace Ling\Light_RealGenerator\Generator;
 
 
 use Ling\BabyYaml\BabyYamlUtil;
+use Ling\Bat\ArrayTool;
 use Ling\Bat\FileSystemTool;
 use Ling\Light_DatabaseInfo\Service\LightDatabaseInfoService;
 use Ling\Light_RealGenerator\Exception\LightRealGeneratorException;
@@ -70,8 +71,7 @@ class ListConfigGenerator extends BaseConfigGenerator
         $rowsRendererTypeAliases = $this->getKeyValue("list.rows_renderer_type_aliases", false, []);
         $rowsRendererTypesGeneral = $this->getKeyValue("list.rows_renderer_types_general", false, []);
         $rowsRendererTypesSpecific = $this->getKeyValue("list.rows_renderer_types_specific.$table", false, []);
-
-
+        $relatedLinks = $this->getKeyValue("list.related_links", false, []);
         $ignoreColumns = array_unique(array_merge($globalIgnoreColumns, $ignoreColumns));
         /**
          * @var $dbInfo LightDatabaseInfoService
@@ -83,6 +83,20 @@ class ListConfigGenerator extends BaseConfigGenerator
         $main['ric'] = $tableInfo['ric'];
         $columns = array_merge(array_diff($tableInfo['columns'], $ignoreColumns));
         $main['base_fields'] = $columns;
+
+
+        $tableNoPrefix = $this->getTableWithoutPrefix($table);
+        $tableLabel = str_replace("_", " ", $tableNoPrefix);
+        $tableLabelUcFirst = ucfirst($tableLabel);
+        $relatedLinksTags = [
+            '{label}' => $tableLabel,
+            '{Label}' => $tableLabelUcFirst,
+            '{table}' => $table,
+        ];
+        $relatedLinks = ArrayTool::replaceRecursive($relatedLinksTags, $relatedLinks);
+
+
+
 
 
         if ('openAdminOne') {
@@ -315,6 +329,7 @@ class ListConfigGenerator extends BaseConfigGenerator
                 ],
                 "column_labels" => $columnLabels,
                 "rows_renderer" => $rowsRenderer,
+                "related_links" => $relatedLinks,
             ];
 
 
@@ -431,5 +446,24 @@ class ListConfigGenerator extends BaseConfigGenerator
                 }
             }
         });
+    }
+
+
+    /**
+     * Returns the table name without prefix.
+     *
+     * @param string $table
+     * @return string
+     * @throws \Exception
+     */
+    protected function getTableWithoutPrefix(string $table): string
+    {
+        $prefixes = $this->getKeyValue("prefixes", false, []);
+        foreach ($prefixes as $prefix) {
+            if (0 === strpos($table, $prefix)) {
+                return substr($table, strlen($prefix . "_"));
+            }
+        }
+        return $table;
     }
 }

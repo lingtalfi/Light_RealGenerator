@@ -37,6 +37,14 @@ main:
         ?remove: []
             - luda_resource
 
+    # This section defines the table prefixes.
+    # A prefix is an arbitrary string in front of the table name, and followed by an underscore.
+    # It's like a namespace for tables if you will.
+    # The prefixes, or the table name without prefix are information that might be used by other parts of this generator.
+    table_prefixes:
+        - luda
+
+
     # This array let you ignore/skip columns that you want to exclude from both the list and form generated config files.
     # It's an array of table => columnNames, with columnNames being an array of column names.
     ?ignore_columns:
@@ -127,6 +135,22 @@ main:
         ?rows_renderer_types_specific:
             lud_user:
                 avatar_url: $img100
+        # An optional array of related links to add to all generated files.
+        # Each related link is an array containing the properties you want.
+        # Usually, you will use the following:
+        # - text: string
+        # - url: string
+        # - icon: string
+        # In the property values, the following tags are available:
+        # - {label}, the human name derived from the table name (using internal heuristics)
+        # - {Label}, same as label, but with first letter uppercase
+        # - {table}, the table name
+        ?related_links:
+            -
+                text: Add new {label}
+                url: REALIST(Light_Realist, route, lka_route-{table})
+                icon: fas fa-plus-circle
+
 
 
     # This section defines the behaviour of the form configuration file generator

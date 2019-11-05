@@ -82,6 +82,10 @@ Related
 History Log
 =============
 
+- 1.4.0 -- 2019-11-05
+
+    - update ListConfigGenerator, now handles the related_links section
+
 - 1.3.1 -- 2019-11-05
 
     - fix ListConfigGenerator generating fields instead of base_fields
