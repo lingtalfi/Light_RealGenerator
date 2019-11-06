@@ -6,7 +6,6 @@ namespace Ling\Light_RealGenerator\Generator;
 
 use Ling\BabyYaml\BabyYamlUtil;
 use Ling\Bat\ArrayTool;
-use Ling\Bat\CaseTool;
 use Ling\Bat\FileSystemTool;
 use Ling\Light_DatabaseInfo\Service\LightDatabaseInfoService;
 use Ling\Light_RealGenerator\Exception\LightRealGeneratorException;
@@ -92,9 +91,6 @@ class ListConfigGenerator extends BaseConfigGenerator
         $genericTags = $this->getGenericTagsByTable($table);
         ArrayTool::replaceRecursive($genericTags, $relatedLinks);
         $listTitle = str_replace(array_keys($genericTags), array_values($genericTags), $listTitle);
-
-
-
 
 
         if ('openAdminOne') {
@@ -428,14 +424,18 @@ class ListConfigGenerator extends BaseConfigGenerator
 
     /**
      * Transform the given types array in place, by replacing the alias notation ($alias) with the referenced values.
+     * Also replace generic tags by their values.
+     * See the @page(getGenericTagsByTable method) for more info.
      *
      * @param array $types
      * @param array $rowsRendererTypeAliases
      * @param string $table
+     * @throws \Exception
      */
     protected function convertTypeAliases(array &$types, array $rowsRendererTypeAliases, string $table)
     {
-        array_walk($types, function (&$v, $k) use ($rowsRendererTypeAliases, $table) {
+        $tags = $this->getGenericTagsByTable($table);
+        array_walk($types, function (&$v, $k) use ($rowsRendererTypeAliases, $table, $tags) {
             if (is_string($v) && '$' === substr($v, 0, 1)) {
                 $alias = substr($v, 1);
                 if (array_key_exists($alias, $rowsRendererTypeAliases)) {
@@ -443,6 +443,12 @@ class ListConfigGenerator extends BaseConfigGenerator
                 } else {
                     throw new LightRealGeneratorException("Type alias not defined: $alias with table $table.");
                 }
+            }
+
+            if (is_string($v)) {
+                $v = str_replace(array_keys($tags), array_values($tags), $v);
+            } elseif (is_array($v)) {
+                ArrayTool::replaceRecursive($tags, $v);
             }
         });
     }

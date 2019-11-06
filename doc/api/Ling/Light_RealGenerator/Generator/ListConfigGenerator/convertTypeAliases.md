@@ -22,6 +22,8 @@ protected [ListConfigGenerator::convertTypeAliases](https://github.com/lingtalfi
 
 
 Transform the given types array in place, by replacing the alias notation ($alias) with the referenced values.
+Also replace generic tags by their values.
+See the [getGenericTagsByTable method](https://github.com/lingtalfi/Light_RealGenerator/blob/master/doc/api/Ling/Light_RealGenerator/Generator/BaseConfigGenerator/getGenericTagsByTable.md) for more info.
 
 
 
@@ -49,6 +51,11 @@ Return values
 Returns void.
 
 
+Exceptions thrown
+================
+
+- [Exception](http://php.net/manual/en/class.exception.php).&nbsp;
+
 
 
 
@@ -57,7 +64,7 @@ Returns void.
 
 Source Code
 ===========
-See the source code for method [ListConfigGenerator::convertTypeAliases](https://github.com/lingtalfi/Light_RealGenerator/blob/master/Generator/ListConfigGenerator.php#L436-L448)
+See the source code for method [ListConfigGenerator::convertTypeAliases](https://github.com/lingtalfi/Light_RealGenerator/blob/master/Generator/ListConfigGenerator.php#L435-L454)
 
 
 See Also

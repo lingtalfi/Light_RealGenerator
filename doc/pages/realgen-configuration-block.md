@@ -121,28 +121,29 @@ main:
         # Defines some rows renderer type aliases to re-use in other parts of the configuration (rows_renderer_types_general and
         # rows_renderer_types_specific options can both use those aliases).
         # An alias is whatever you want, depending on your rows renderer instance.
+        # The generic_tags (defined in the list option at the root level) are available.
         ?rows_renderer_type_aliases:
             img100:
                 type: image
                 width: 100
-        # Defines rows renderer types based on a general column name.
-        # Meaning every time a column has a name listed in this option, it will be inferred the type that you've specified,
-        # unless a more specific type has been defined (with the rows_renderer_types_specific option), in which case the more
-        # specific type is used.
+        # Defines rows renderer types to add to every generated list configuration file.
+        # This can be overridden by the rows_renderer_types_specific option.
         # It's an array of columnName => type.
         # The type is whatever you want, depending on your rows renderer instance.
         # Also, the type can refer to an (pre-defined) alias by preceding it with the dollar symbol.
         # Note: aliases are defined with the rows_renderer_types_alias option.
+        # The generic_tags (defined in the list option at the root level) are available.
         ?rows_renderer_types_general:
             avatar_url: $img100
             checkbox: checkbox
 
-        # Defines rows renderer types based on a table name and a column name.
+        # Defines rows renderer types to add for a specific table.
+        # It has precedence over the rows_renderer_type_general option.
         # It's an array of table => types, with types being an array of columnName => type.
         # The type is whatever you want, depending on your rows renderer instance.
         # Also, the type can refer to an (pre-defined) alias by preceding it with the dollar symbol.
         # Note: aliases are defined with the rows_renderer_types_alias option.
-
+        # The generic_tags (defined in the list option at the root level) are available.
         ?rows_renderer_types_specific:
             lud_user:
                 avatar_url: $img100
