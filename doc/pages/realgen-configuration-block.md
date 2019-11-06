@@ -79,16 +79,23 @@ main:
         # Whether to use the action column (added to every row). Defaults to true.
         ?use_action_column: true
 
+        # The name of the action column (only if use_action_column=true). Defaults to "action".
+        # Tip: the default value is set by the LightRealistService->executeRequestById method.
+        ?column_action_name: action
+
+        # The label for the action column (only if use_action_column=true). Defaults to "Actions".
+        ?column_action_label: Actions
+
+
         # Whether to use the checkbox column (added to every row). Defaults to true.
         ?use_checkbox_column: true
-
-        # The name of the actions column (only if use_action_column=true). Defaults to "actions".
-        # Tip: the default value is set by the LightRealistService->executeRequestById method.
-        ?column_action_name: actions
 
         # The name of the checkbox column (only if use_checkbox_column=true). Defaults to "checkbox".
         # Tip: the default value is set by the LightRealistService->executeRequestById method.
         ?column_checkbox_name: checkbox
+
+        # The label for the checkbox column (only if use_checkbox_column=true). Defaults to "#".
+        ?column_checkbox_label: "#"
 
         # This array let you ignore/skip columns that you want to exclude from the generated list config file.
         # It's an array of table => columnNames, with columnNames being an array of column names.
@@ -106,6 +113,7 @@ main:
                 pseudo: enum
         # This array let you override the default column labels.
         # It's an array of table => labels, with labels being an array of columnName => label.
+        # Note: for the special columns checkbox and action, the labels are set with column_action_label and column_checkbox_label.
         #
         ?column_labels:
             lud_user:

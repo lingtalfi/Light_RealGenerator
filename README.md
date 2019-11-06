@@ -82,7 +82,12 @@ Related
 History Log
 =============
 
-- 1.7.0 -- 2019-11-05
+- 1.8.0 -- 2019-11-06
+
+    - update ListConfigGenerator, now we can set the label for checkbox and action
+    - fix functional typo in ListConfigGenerator 
+    
+- 1.7.0 -- 2019-11-06
 
     - update ListConfigGenerator, now rows renderer types accept the generic tags
     

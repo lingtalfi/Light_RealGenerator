@@ -64,8 +64,10 @@ class ListConfigGenerator extends BaseConfigGenerator
         $globalIgnoreColumns = $this->getKeyValue("ignore_columns.$table", false, []);
         $useActionColumn = $this->getKeyValue("list.use_action_column", false, true);
         $useCheckboxColumn = $this->getKeyValue("list.use_checkbox_column", false, true);
-        $columnActionName = $this->getKeyValue("list.column_action_name", false, 'actions');
+        $columnActionName = $this->getKeyValue("list.column_action_name", false, 'action');
         $columnCheckboxName = $this->getKeyValue("list.column_checkbox_name", false, 'checkbox');
+        $columnActionLabel = $this->getKeyValue("list.column_action_label", false, "Actions");
+        $columnCheckboxLabel = $this->getKeyValue("list.column_checkbox_label", false, '#');
         $rowsRendererIdentifier = $this->getKeyValue("list.rows_renderer_identifier", false);
         $rowsRendererClass = $this->getKeyValue("list.rows_renderer_class", false);
         $rowsRendererTypeAliases = $this->getKeyValue("list.rows_renderer_type_aliases", false, []);
@@ -257,7 +259,15 @@ class ListConfigGenerator extends BaseConfigGenerator
             if (true === $useActionColumn) {
                 $columnLabelsBase[] = $columnActionName;
             }
+            /**
+             * Note: we don't add the checkbox in the labels, as it might conflict with the checkbox widget of the renderer.
+             * See the realist conception notes for more info.
+             */
             $columnLabels = $this->createColumnLabels($columnLabelsBase, $table);
+
+            if (true === $useActionColumn) {
+                $columnLabels[$columnActionName] = $columnActionLabel;
+            }
 
 
             $rowsRenderer = [];
