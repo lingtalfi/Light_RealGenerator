@@ -82,6 +82,10 @@ Related
 History Log
 =============
 
+- 1.9.0 -- 2019-11-13
+
+    - implemented cross column concept
+    
 - 1.8.0 -- 2019-11-06
 
     - update ListConfigGenerator, now we can set the label for checkbox and action

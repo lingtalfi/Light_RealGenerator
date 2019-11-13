@@ -49,5 +49,49 @@ See the [configuration block document](https://github.com/lingtalfi/Light_RealGe
 
 
 
+The representative column
+---------------
+2019-11-13
+
+
+While implementing the concept of [cross columns](https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/crossed-column.md) for this generator,
+I was looking for a term to designate the name of the more descriptive column (to help the foreign key look less robotic),
+and I came up with the term representative column.
+
+So for instance, let's take back the example from the **cross column** page, with the **user_has_permission** table.
+And let's push it a bit further and imagine this structure instead:
+
+
+```text
+
+- user:
+    - id
+    - full_name
+
+- user_has_permission:
+    - user_id
+    - permission_id
+
+- permission:
+    - id
+    - name
+
+```
+
+Then the representative column for the **user_has_permission.user_id** foreign key would be the **user.full_name** column,
+and the representative column for the **user_has_permission.permission_id** foreign key would be the **permission.name** column.
+
+
+In this example, things are deliberately simple, but in reality, the user table for instance would have more fields to choose from,
+and so one of the job of this generator is to use some heuristics to define which column is the best representative
+column, but, I digress. 
+
+
+
+
+
+
+
+
 
 

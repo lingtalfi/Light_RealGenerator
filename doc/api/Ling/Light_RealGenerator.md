@@ -1,6 +1,6 @@
 Ling/Light_RealGenerator
 ================
-2019-10-24 --> 2019-11-06
+2019-10-24 --> 2019-11-13
 
 
 
@@ -24,6 +24,11 @@ Table of contents
     - [LightRealGeneratorService::__construct](https://github.com/lingtalfi/Light_RealGenerator/blob/master/doc/api/Ling/Light_RealGenerator/Service/LightRealGeneratorService/__construct.md) &ndash; Builds the LightRealGeneratorService instance.
     - [LightRealGeneratorService::generate](https://github.com/lingtalfi/Light_RealGenerator/blob/master/doc/api/Ling/Light_RealGenerator/Service/LightRealGeneratorService/generate.md) &ndash; according to the [configuration block](https://github.com/lingtalfi/Light_RealGenerator/blob/master/doc/pages/realgen-configuration-block.md) identified by the given file and identifier.
     - [LightRealGeneratorService::setContainer](https://github.com/lingtalfi/Light_RealGenerator/blob/master/doc/api/Ling/Light_RealGenerator/Service/LightRealGeneratorService/setContainer.md) &ndash; Sets the container.
+- [RepresentativeColumnFinderUtil](https://github.com/lingtalfi/Light_RealGenerator/blob/master/doc/api/Ling/Light_RealGenerator/Util/RepresentativeColumnFinderUtil.md) &ndash; The RepresentativeColumnFinderUtil class.
+    - [RepresentativeColumnFinderUtil::__construct](https://github.com/lingtalfi/Light_RealGenerator/blob/master/doc/api/Ling/Light_RealGenerator/Util/RepresentativeColumnFinderUtil/__construct.md) &ndash; Builds the RepresentativeColumnFinderUtil instance.
+    - [RepresentativeColumnFinderUtil::findRepresentativeColumn](https://github.com/lingtalfi/Light_RealGenerator/blob/master/doc/api/Ling/Light_RealGenerator/Util/RepresentativeColumnFinderUtil/findRepresentativeColumn.md) &ndash; Returns the [representative column](https://github.com/lingtalfi/Light_RealGenerator/blob/master/doc/pages/conception-notes.md#the-representative-column) from the given table name.
+    - [RepresentativeColumnFinderUtil::setCommonMatches](https://github.com/lingtalfi/Light_RealGenerator/blob/master/doc/api/Ling/Light_RealGenerator/Util/RepresentativeColumnFinderUtil/setCommonMatches.md) &ndash; Sets the commonMatches.
+    - [RepresentativeColumnFinderUtil::setContainer](https://github.com/lingtalfi/Light_RealGenerator/blob/master/doc/api/Ling/Light_RealGenerator/Util/RepresentativeColumnFinderUtil/setContainer.md) &ndash; Sets the container.
 
 
 Dependencies

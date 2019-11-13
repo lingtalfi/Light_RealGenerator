@@ -9,7 +9,7 @@ Below is it's babyYaml form, commented, which serves as the reference documentat
 
 
 
-```yaml
+```txt
 main:
     # This is optional. Under the hood, the real generator uses the Light_Database plugin to interact with the database,
     # and so the default value will be the one defined by the Light_Database plugin.
@@ -79,6 +79,47 @@ main:
         # Whether to use the action column (added to every row). Defaults to true.
         ?use_action_column: true
 
+        # Whether to use the cross columns on foreign keys
+        # See more about cross columns in https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/crossed-column.md
+        ?use_cross_columns: true
+
+        # An array of common representative column names.
+        # Only used if use_cross_columns=true.
+        # The default value is an array containing the following:
+        # - name
+        # - label
+        # - identifier
+        # If you define this array, it overrides the value entirely (i.e. it's not merged with the default values, but
+        # will rather replace them).
+        # More info about representatives in https://github.com/lingtalfi/Light_RealGenerator/blob/master/doc/pages/conception-notes.md#the-representative-column
+        ?common_representative_matches: []
+            - pseudo
+
+        # A string representing how to display the foreign key in the cross column.
+        # Only used if use_cross_columns=true.
+        # The following tags are available:
+        # - $fk: the name of the foreign key column (prefix with an alias)
+        # - $rc: the name of the representative column (prefixed with an alias)
+        # The default value is 
+        # - concat($fk, '. ', $rc)
+        ?cross_column_fk_format: concat($fk, '. ', $rc)
+
+        # A string used to generate the value of a parameter for the Light_Realist.hub_link column transformer,
+        # which is a built-in transformer provided by Light_Realist.
+        # This is used to create a link out of the cross column.
+        # 
+        # See more about the column transformer in: https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/realist-conception-notes.md#types-the-column-transformers
+        # See more about the cross columns in: https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/crossed-column.md
+        # 
+        # In particular, the url_params.controller value is generated from this option.
+        # See the BaseRealistRowsRenderer implementation for more details: https://github.com/lingtalfi/Light_Realist/blob/master/doc/api/Ling/Light_Realist/Rendering/BaseRealistRowsRenderer.md
+        # The following tags are available:
+        # - {Table}: the referenced table name is pascal case (https://github.com/lingtalfi/ConventionGuy/blob/master/nomenclature.stringCases.eng.md#pascalcase).
+        # The default value is:
+        # - Generated/{Table}Controller
+        # 
+        ?cross_column_hub_link_controller_format: Generated/{Table}Controller
+
         # The name of the action column (only if use_action_column=true). Defaults to "action".
         # Tip: the default value is set by the LightRealistService->executeRequestById method.
         ?column_action_name: action
@@ -125,6 +166,9 @@ main:
         # Defines the rows_renderer.class value. If you define this key, it will have precedence
         # over the rows_renderer_identifier option.
         ?rows_renderer_class: My\Class
+
+
+
 
         # Defines some rows renderer type aliases to re-use in other parts of the configuration (rows_renderer_types_general and
         # rows_renderer_types_specific options can both use those aliases).
