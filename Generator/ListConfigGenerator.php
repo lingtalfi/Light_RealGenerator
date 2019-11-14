@@ -111,9 +111,9 @@ class ListConfigGenerator extends BaseConfigGenerator
          */
         $dbInfo = $this->container->get('database_info');
         $tableInfo = $dbInfo->getTableInfo($table, $database);
-        $autoIncrementedKey = $tableInfo['autoIncrementedKey'];
 
-        $main['ric'] = $tableInfo['ric'];
+        $tableRic = $tableInfo['ric'];
+        $main['ric'] = $tableRic;
         $dbName = $tableInfo['database'];
         $columns = array_merge(array_diff($tableInfo['columns'], $ignoreColumns));
         $baseFields = $columns;
@@ -267,13 +267,20 @@ class ListConfigGenerator extends BaseConfigGenerator
                 "generic_sub_filter" => '$column like :%operator_value%',
             ];
 
-            if ('id' === $autoIncrementedKey) {
-                $main['where']['in_ids'] = 'id in ($ids)';
-            }
+
+            // deprecated and replaced with in_rics
+//            if ('id' === $autoIncrementedKey) {
+//                $main['where']['in_ids'] = 'id in ($ids)';
+//            }
             $main['where']['open_parenthesis'] = '(';
             $main['where']['close_parenthesis'] = ')';
             $main['where']['and'] = 'and';
             $main['where']['or'] = 'or';
+
+            $sInRics = implode(' and ', array_map(function ($v) {
+                return "$v like :$v";
+            }, $tableRic));
+            $main['where']['in_rics'] = '(' . $sInRics . ')';
 
 
             //--------------------------------------------

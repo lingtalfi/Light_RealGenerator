@@ -82,6 +82,10 @@ Related
 History Log
 =============
 
+- 1.9.1 -- 2019-11-14
+
+    - fix ListConfigGenerator: in_rics not being generated
+    
 - 1.9.0 -- 2019-11-13
 
     - implemented cross column concept
