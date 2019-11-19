@@ -67,9 +67,13 @@ class RepresentativeColumnFinderUtil
             }
         }
 
-
         // otherwise return the first column of type string
-        return $firstStringTypeCol;
+        if (null !== $firstStringTypeCol) {
+            return $firstStringTypeCol;
+        }
+
+        // eventually return any column name
+        return $col;
     }
 
     //--------------------------------------------

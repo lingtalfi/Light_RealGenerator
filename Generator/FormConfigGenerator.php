@@ -6,10 +6,10 @@ namespace Ling\Light_RealGenerator\Generator;
 
 use Ling\ArrayVariableResolver\ArrayVariableResolverUtil;
 use Ling\BabyYaml\BabyYamlUtil;
-use Ling\Bat\ArrayTool;
 use Ling\Bat\FileSystemTool;
 use Ling\Light_DatabaseInfo\Service\LightDatabaseInfoService;
 use Ling\Light_RealGenerator\Exception\LightRealGeneratorException;
+use Ling\Light_RealGenerator\Util\RepresentativeColumnFinderUtil;
 
 /**
  * The FormConfigGenerator class.
@@ -38,6 +38,9 @@ class FormConfigGenerator extends BaseConfigGenerator
             $path = $targetDir . '/' . $fileName;
             FileSystemTool::mkfile($path, $content);
         }
+
+
+        $this->generateContentByTables($tables);
     }
 
 
@@ -69,8 +72,14 @@ class FormConfigGenerator extends BaseConfigGenerator
         $fieldsMergeSpecific = $this->getKeyValue("form.fields_merge_specific.$table", false, []);
         $onSuccessHandler = $this->getKeyValue("form.on_success_handler", false, []);
         $formTitle = $this->getKeyValue("form.title", false, "{Label} form");
+        $specialFields = $this->getKeyValue("form.special_fields", false, []);
         $onSuccessHandlerType = $onSuccessHandler['type'] ?? "database";
 
+
+        // special types
+        $chloroformExtensions = $specialFields['chloroform_extensions'] ?? [];
+        $useTableList = $chloroformExtensions['use_table_list'] ?? true;
+        $tableListConfigFile = $chloroformExtensions['table_list_config_file'] ?? null;
 
 
         $genericTags = $this->getGenericTagsByTable($table);
@@ -91,6 +100,7 @@ class FormConfigGenerator extends BaseConfigGenerator
          */
         $dbInfo = $this->container->get('database_info');
         $tableInfo = $dbInfo->getTableInfo($table, $database);
+        $foreignKeysInfo = $tableInfo['foreignKeysInfo'];
         $autoIncrementedKey = $tableInfo['autoIncrementedKey'];
         if (false !== $autoIncrementedKey) {
             $ignoreColumns[] = $autoIncrementedKey;
@@ -135,6 +145,21 @@ class FormConfigGenerator extends BaseConfigGenerator
                 }
 
 
+                // special item?
+                $specialItem = [];
+                if (true === $useTableList && array_key_exists($col, $foreignKeysInfo)) {
+                    list($rfDb, $rfTable, $rfCol) = $foreignKeysInfo[$col];
+                    $specialItem = [
+                        "type" => "table_list",
+                        "tableListIdentifier" => $pluginName . ".$rfTable.$rfCol",
+//                        "threshold" => 200,
+                    ];
+                    if (null !== $tableListConfigFile) {
+
+                    }
+                }
+
+
                 $sqlType = $types[$col];
                 $type = $this->getFieldType($sqlType);
                 $label = str_replace('_', ' ', ucfirst(strtolower($col)));
@@ -152,7 +177,7 @@ class FormConfigGenerator extends BaseConfigGenerator
                 ];
 
                 // note: merge is less specific than custom item
-                $fieldItem = array_replace_recursive($fieldItem, $merge, $customItem);
+                $fieldItem = array_replace_recursive($fieldItem, $specialItem, $merge, $customItem);
 
                 $variableResolver->resolve($fieldItem, $theVariables);
 
@@ -168,7 +193,6 @@ class FormConfigGenerator extends BaseConfigGenerator
 
 
         $arr['form_handler'] = $formHandler;
-
 
 
         //--------------------------------------------
@@ -245,5 +269,68 @@ class FormConfigGenerator extends BaseConfigGenerator
 
 
         return $type;
+    }
+
+
+    /**
+     * Generate some content that applies to the whole table selection rather than on each individual tables.
+     *
+     * @param array $tables
+     * @throws \Exception
+     */
+    protected function generateContentByTables(array $tables)
+    {
+
+        $pluginName = $this->getKeyValue('plugin_name');
+        $specialFields = $this->getKeyValue("form.special_fields", false, []);
+        $chloroformExtensions = $specialFields['chloroform_extensions'] ?? [];
+        $useTableList = $chloroformExtensions['use_table_list'] ?? true;
+        $tableListConfigFile = $chloroformExtensions['table_list_config_file'] ?? null;
+        $database = $this->getKeyValue('database_name', false, null);
+        $commonRepresentativeMatches = $this->getKeyValue("list.common_representative_matches", false, [
+            'name',
+            'label',
+            'identifier',
+        ]);
+
+
+        $reprFinder = new RepresentativeColumnFinderUtil();
+        $reprFinder->setContainer($this->container);
+        $reprFinder->setCommonMatches($commonRepresentativeMatches);
+
+        /**
+         * @var $dbInfo LightDatabaseInfoService
+         */
+        $dbInfo = $this->container->get('database_info');
+
+
+        if (true === $useTableList && null !== $tableListConfigFile) {
+            $appDir = $this->container->getApplicationDir();
+            $tableListConfigFile = str_replace('{app_dir}', $appDir, $tableListConfigFile);
+
+
+            $arr = [];
+            foreach ($tables as $table) {
+                $tableInfo = $dbInfo->getTableInfo($table, $database);
+                $columns = $tableInfo['columns'];
+                $foreignKeysInfo = $tableInfo['foreignKeysInfo'];
+                foreach ($columns as $col) {
+                    if (array_key_exists($col, $foreignKeysInfo)) {
+                        list($rfDb, $rfTable, $rfCol) = $foreignKeysInfo[$col];
+                        $commonRepresentative = $reprFinder->findRepresentativeColumn($rfTable);
+                        $key = "$rfTable.$rfCol";
+                        $arr[$key] = [
+                            "fields" => "$rfCol as value, concat($rfCol, '. ', $commonRepresentative) as label",
+                            "table" => $rfTable,
+                            "column" => $rfCol,
+                            "csrf_token" => true,
+                            "micro_permission" => "$pluginName.tables.$rfTable.read",
+                        ];
+                    }
+                }
+
+            }
+            FileSystemTool::mkfile($tableListConfigFile, BabyYamlUtil::getBabyYamlString($arr));
+        }
     }
 }

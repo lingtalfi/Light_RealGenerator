@@ -291,6 +291,29 @@ main:
             lud_user:
                 avatar_url: $ajax1
 
+
+        # An array to handle some special fields automatically.
+        # It's an array of section => parameters.
+        ?special_fields:
+            # The chloroform_extensions section.
+            # All fields coming from the Light_ChloroformExtension plugin should be handled there.
+            # -> https://github.com/lingtalfi/Light_ChloroformExtension
+            #
+            ?chloroform_extensions:
+                # Bool, whether to use table list on foreign keys.
+                # The default value is true.
+                # When true, if a field is a foreign key we will generate the configuration for a table list field (https://github.com/lingtalfi/Light_ChloroformExtension/blob/master/doc/pages/conception-notes.md#tablelistfield).
+                ?use_table_list: true
+                # Beside from generating those configuration items, we can also generate the table list fields specific configuration items (https://github.com/lingtalfi/Light_ChloroformExtension/blob/master/doc/pages/conception-notes.md#configuration-item).
+                # This is done by setting the table_list_config_file property below.
+                # If null (by default), we will not generate those table list configuration items.
+                # If set to a path, the table list configuration items will be generated/written inside this file.
+                # Each entry's key will have the following format:
+                #       - {referencedTable}.{referencedField}
+                # For the values, please refer to the actual implementation.
+                ?table_list_config_file: null
+
+
         # An array of table => notRequiredFields, with notRequiredFields being an array of the fields for which you don't
         # want a required validator to be set automatically.
         ?not_required:

@@ -4,7 +4,7 @@
 
 The RepresentativeColumnFinderUtil class
 ================
-2019-10-24 --> 2019-11-14
+2019-10-24 --> 2019-11-19
 
 
 

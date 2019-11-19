@@ -5,7 +5,6 @@ namespace Ling\Light_RealGenerator\Service;
 
 
 use Ling\BabyYaml\BabyYamlUtil;
-use Ling\Bat\SmartCodeTool;
 use Ling\Light\ServiceContainer\LightServiceContainerInterface;
 use Ling\Light_RealGenerator\Exception\LightRealGeneratorException;
 use Ling\Light_RealGenerator\Generator\FormConfigGenerator;

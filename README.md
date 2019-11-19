@@ -82,6 +82,10 @@ Related
 History Log
 =============
 
+- 1.10.0 -- 2019-11-19
+
+    - update FormConfigGenerator, now handles TableListField objects
+    
 - 1.9.1 -- 2019-11-14
 
     - fix ListConfigGenerator: in_rics not being generated
