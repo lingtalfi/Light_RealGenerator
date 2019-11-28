@@ -205,7 +205,7 @@ class FormConfigGenerator extends BaseConfigGenerator
                     "type" => "database",
                     "params" => [
                         "table" => $table,
-                        "microPermissionPluginName" => $pluginName
+                        "pluginName" => $pluginName
                     ],
                 ];
                 break;

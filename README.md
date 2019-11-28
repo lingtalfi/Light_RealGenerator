@@ -82,6 +82,10 @@ Related
 History Log
 =============
 
+- 1.11.0 -- 2019-11-28
+
+    - update FormConfigGenerator to accommodate with new database success handler
+    
 - 1.10.0 -- 2019-11-19
 
     - update FormConfigGenerator, now handles TableListField objects
