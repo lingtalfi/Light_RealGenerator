@@ -82,6 +82,10 @@ Related
 History Log
 =============
 
+- 1.12.0 -- 2019-12-02
+
+    - update FormConfigGenerator to accommodate new TableField.search_column property
+    
 - 1.11.0 -- 2019-11-28
 
     - update FormConfigGenerator to accommodate with new database success handler

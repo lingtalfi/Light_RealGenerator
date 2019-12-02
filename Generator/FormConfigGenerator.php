@@ -319,10 +319,12 @@ class FormConfigGenerator extends BaseConfigGenerator
                         list($rfDb, $rfTable, $rfCol) = $foreignKeysInfo[$col];
                         $commonRepresentative = $reprFinder->findRepresentativeColumn($rfTable);
                         $key = "$rfTable.$rfCol";
+                        $sConcat = "concat($rfCol, '. ', $commonRepresentative)";
                         $arr[$key] = [
-                            "fields" => "$rfCol as value, concat($rfCol, '. ', $commonRepresentative) as label",
+                            "fields" => "$rfCol as value, $sConcat as label",
                             "table" => $rfTable,
                             "column" => $rfCol,
+                            "search_column" => $sConcat,
                             "csrf_token" => true,
                             "micro_permission" => "$pluginName.tables.$rfTable.read",
                         ];
