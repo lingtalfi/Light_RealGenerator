@@ -4,7 +4,7 @@
 
 The ListConfigGenerator class
 ================
-2019-10-24 --> 2019-12-02
+2019-10-24 --> 2019-12-03
 
 
 
@@ -51,6 +51,7 @@ class <span class="pl-k">ListConfigGenerator</span> extends [BaseConfigGenerator
     - protected [BaseConfigGenerator::setConfig](https://github.com/lingtalfi/Light_RealGenerator/blob/master/doc/api/Ling/Light_RealGenerator/Generator/BaseConfigGenerator/setConfig.md)(array $config) : void
     - protected [BaseConfigGenerator::getGenericTagsByTable](https://github.com/lingtalfi/Light_RealGenerator/blob/master/doc/api/Ling/Light_RealGenerator/Generator/BaseConfigGenerator/getGenericTagsByTable.md)(string $table) : array
     - protected [BaseConfigGenerator::getTableWithoutPrefix](https://github.com/lingtalfi/Light_RealGenerator/blob/master/doc/api/Ling/Light_RealGenerator/Generator/BaseConfigGenerator/getTableWithoutPrefix.md)(string $table) : string
+    - protected [BaseConfigGenerator::isHasTable](https://github.com/lingtalfi/Light_RealGenerator/blob/master/doc/api/Ling/Light_RealGenerator/Generator/BaseConfigGenerator/isHasTable.md)(string $table) : bool
 
 }
 
@@ -106,6 +107,7 @@ Methods
 - [BaseConfigGenerator::setConfig](https://github.com/lingtalfi/Light_RealGenerator/blob/master/doc/api/Ling/Light_RealGenerator/Generator/BaseConfigGenerator/setConfig.md) &ndash; Sets the [configuration block](https://github.com/lingtalfi/Light_RealGenerator/blob/master/doc/pages/realgen-configuration-block.md).
 - [BaseConfigGenerator::getGenericTagsByTable](https://github.com/lingtalfi/Light_RealGenerator/blob/master/doc/api/Ling/Light_RealGenerator/Generator/BaseConfigGenerator/getGenericTagsByTable.md) &ndash; Returns the array of generic tags (used in the list and form configuration files), based on the given table.
 - [BaseConfigGenerator::getTableWithoutPrefix](https://github.com/lingtalfi/Light_RealGenerator/blob/master/doc/api/Ling/Light_RealGenerator/Generator/BaseConfigGenerator/getTableWithoutPrefix.md) &ndash; Returns the table name without prefix.
+- [BaseConfigGenerator::isHasTable](https://github.com/lingtalfi/Light_RealGenerator/blob/master/doc/api/Ling/Light_RealGenerator/Generator/BaseConfigGenerator/isHasTable.md) &ndash; Returns whether the given table is a **has** table (aka a many to many table, such as user_has_permission for instance).
 
 
 

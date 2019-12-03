@@ -44,6 +44,16 @@ main:
     table_prefixes:
         - luda
 
+    # Array. Optional. Defaults to the example below. Defines a has table detection mechanism that can be used by the other
+    # sections of this file.
+    has_tables:
+        # Array. Optional. Defaults to an array containing one entry with value="has".
+        # This array defines which values trigger the detection of a has table.
+        # The detection of a has table is triggered if the expression composed of the keyword surrounded with underscores
+        # is contained in the table name.
+        keywords:
+            - has
+
 
     # This array let you ignore/skip columns that you want to exclude from both the list and form generated config files.
     # It's an array of table => columnNames, with columnNames being an array of column names.
@@ -326,6 +336,18 @@ main:
             # The available values are:
             # - database
             type: database
+            # Array. Optional. Defines the options for the given success handler type.
+            options:
+                # Bool. Optional. Applies only if type=database. Whether to use the form multiplier trick on has tables.
+                # See https://github.com/lingtalfi/TheBar/blob/master/discussions/form-multiplier.md for more info.
+                # If you use this option, make sure that
+                # - the multiplier.column is placed before the multiplier.update_cleaner_column in the table,
+                # - the strict ric of the table is composed of the multiplier column and update_cleaner_column only
+                # That's because our generator guesses the multiplier columns from the strict ric,  and considers the first
+                # entry to be the foreign key to the left member, and the second the foreign key to the right member of the has table.
+                # More info on ric strict: https://github.com/lingtalfi/NotationFan/blob/master/ric.md#the-strict-ric
+                #
+                use_multiplier_on_has: true
 
 
 

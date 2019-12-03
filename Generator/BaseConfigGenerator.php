@@ -134,7 +134,6 @@ class BaseConfigGenerator
         $this->config = $config;
     }
 
-
     /**
      * Returns the array of generic tags (used in the list and form configuration files), based on the given table.
      *
@@ -174,4 +173,22 @@ class BaseConfigGenerator
     }
 
 
+    /**
+     * Returns whether the given table is a **has** table (aka a many to many table, such as user_has_permission for instance).
+     * @param string $table
+     * @return bool
+     * @throws \Exception
+     */
+    protected function isHasTable(string $table): bool
+    {
+        $hasTables = $this->getKeyValue("has_tables", false, []);
+        $hasKeywords = $hasTables['keywords'] ?? ['has'];
+        foreach ($hasKeywords as $hasKeyword) {
+            $hasKeyword = '_' . $hasKeyword . '_';
+            if (false !== strpos($table, $hasKeyword)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

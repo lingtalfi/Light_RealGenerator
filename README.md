@@ -82,6 +82,10 @@ Related
 History Log
 =============
 
+- 1.13.0 -- 2019-12-03
+
+    - update FormConfigGenerator now can handle for multiplier trick
+    
 - 1.12.0 -- 2019-12-02
 
     - update FormConfigGenerator to accommodate new TableField.search_column property

@@ -4,6 +4,7 @@
 namespace Ling\Light_RealGenerator\Generator;
 
 
+use Ling\ArrayToString\ArrayToStringTool;
 use Ling\ArrayVariableResolver\ArrayVariableResolverUtil;
 use Ling\BabyYaml\BabyYamlUtil;
 use Ling\Bat\FileSystemTool;
@@ -74,6 +75,7 @@ class FormConfigGenerator extends BaseConfigGenerator
         $formTitle = $this->getKeyValue("form.title", false, "{Label} form");
         $specialFields = $this->getKeyValue("form.special_fields", false, []);
         $onSuccessHandlerType = $onSuccessHandler['type'] ?? "database";
+        $onSuccessHandlerOptions = $onSuccessHandler['options'] ?? [];
 
 
         // special types
@@ -81,7 +83,7 @@ class FormConfigGenerator extends BaseConfigGenerator
         $useTableList = $chloroformExtensions['use_table_list'] ?? true;
         $tableListConfigFile = $chloroformExtensions['table_list_config_file'] ?? null;
 
-
+        $isHasTable = $this->isHasTable($table);
         $genericTags = $this->getGenericTagsByTable($table);
         $formTitle = str_replace(array_keys($genericTags), array_values($genericTags), $formTitle);
         $arr['title'] = $formTitle;
@@ -107,6 +109,7 @@ class FormConfigGenerator extends BaseConfigGenerator
         }
 
         $main['ric'] = $tableInfo['ric'];
+        $ricStrict = $tableInfo['ricStrict'];
         $types = $tableInfo['types'];
         $columns = array_merge(array_diff($tableInfo['columns'], $ignoreColumns));
 
@@ -201,6 +204,7 @@ class FormConfigGenerator extends BaseConfigGenerator
         $onSuccessHandlerArr = [];
         switch ($onSuccessHandlerType) {
             case "database":
+                $useMultiplier = $onSuccessHandlerOptions['use_multiplier_on_has'] ?? true;
                 $onSuccessHandlerArr = [
                     "type" => "database",
                     "params" => [
@@ -208,6 +212,20 @@ class FormConfigGenerator extends BaseConfigGenerator
                         "pluginName" => $pluginName
                     ],
                 ];
+                if (true === $useMultiplier && true === $isHasTable) {
+                    if (2 === count($ricStrict)) {
+                        list($leftCol, $rightCol) = $ricStrict;
+                        $onSuccessHandlerArr['params']['multiplier'] = [
+                            'column' => $rightCol,
+                            'update_cleaner_column' => $leftCol,
+                        ];
+                    } else {
+                        $sRic = ArrayToStringTool::toInlinePhpArray($ricStrict);
+                        throw new LightRealGeneratorException("Don't know how to handle this ric strict with nbEntries!=2 for the multiplier: $sRic.");
+                    }
+                }
+
+
                 break;
             default:
                 throw new LightRealGeneratorException("Unknown success handler type: $onSuccessHandlerType.");
