@@ -54,7 +54,7 @@ Exceptions thrown
 
 Source Code
 ===========
-See the source code for method [FormConfigGenerator::generateContentByTables](https://github.com/lingtalfi/Light_RealGenerator/blob/master/Generator/FormConfigGenerator.php#L299-L355)
+See the source code for method [FormConfigGenerator::generateContentByTables](https://github.com/lingtalfi/Light_RealGenerator/blob/master/Generator/FormConfigGenerator.php#L319-L375)
 
 
 See Also

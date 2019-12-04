@@ -336,18 +336,21 @@ main:
             # The available values are:
             # - database
             type: database
-            # Array. Optional. Defines the options for the given success handler type.
-            options:
-                # Bool. Optional. Applies only if type=database. Whether to use the form multiplier trick on has tables.
-                # See https://github.com/lingtalfi/TheBar/blob/master/discussions/form-multiplier.md for more info.
-                # If you use this option, make sure that
-                # - the multiplier.column is placed before the multiplier.update_cleaner_column in the table,
-                # - the strict ric of the table is composed of the multiplier column and update_cleaner_column only
-                # That's because our generator guesses the multiplier columns from the strict ric,  and considers the first
-                # entry to be the foreign key to the left member, and the second the foreign key to the right member of the has table.
-                # More info on ric strict: https://github.com/lingtalfi/NotationFan/blob/master/ric.md#the-strict-ric
-                #
-                use_multiplier_on_has: true
+
+        # Bool. Optional. Defaults to true. 
+        # Whether to use the multiplier mode on has tables. 
+        # It's used to generate both the database success handler and the realform configuration items.
+        # 
+        # See https://github.com/lingtalfi/TheBar/blob/master/discussions/form-multiplier.md for more info.
+        #
+        # If you use this option, make sure that
+        # - the multiplier.column is placed before the multiplier.update_cleaner_column in the table,
+        # - the strict ric of the table is composed of the multiplier column and update_cleaner_column only
+        # That's because our generator guesses the multiplier columns from the strict ric,  and considers the first
+        # entry to be the foreign key to the left member, and the second the foreign key to the right member of the has table.
+        # More info on ric strict: https://github.com/lingtalfi/NotationFan/blob/master/ric.md#the-strict-ric
+        #
+        use_multiplier_on_has: true
 
 
 

@@ -82,6 +82,10 @@ Related
 History Log
 =============
 
+- 1.14.0 -- 2019-12-04
+
+    - update FormConfigGenerator now can handle for multiplier trick's update initial value
+    
 - 1.13.0 -- 2019-12-03
 
     - update FormConfigGenerator now can handle for multiplier trick

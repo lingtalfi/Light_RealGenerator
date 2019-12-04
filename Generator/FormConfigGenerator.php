@@ -76,6 +76,7 @@ class FormConfigGenerator extends BaseConfigGenerator
         $specialFields = $this->getKeyValue("form.special_fields", false, []);
         $onSuccessHandlerType = $onSuccessHandler['type'] ?? "database";
         $onSuccessHandlerOptions = $onSuccessHandler['options'] ?? [];
+        $useMultiplierOnHas = $this->getKeyValue("form.use_multiplier_on_has", false, true);
 
 
         // special types
@@ -157,8 +158,27 @@ class FormConfigGenerator extends BaseConfigGenerator
                         "tableListIdentifier" => $pluginName . ".$rfTable.$rfCol",
 //                        "threshold" => 200,
                     ];
-                    if (null !== $tableListConfigFile) {
+                    if (true === $useMultiplierOnHas && $isHasTable) {
 
+                        /**
+                         * We consider that the first member of the ricStrict is a fk to the left table,
+                         * and the second member (aka multiplier column) is the fk to the right table.
+                         * Note: this is a rather simplistic approach that assumes that the primary key is
+                         * composed of only two foreign keys.
+                         *
+                         * We might need to upgrade this technique later as the need for more complex db schemas occurs.
+                         *
+                         */
+                        $isPivot = ($ricStrict[0] === $col);
+
+                        if (false === $isPivot) {
+                            $specialItem['mode'] = 'multiplier';
+                            $specialItem['multiplier'] = [
+                                "table" => $table,
+                                "multiplier_column" => $col,
+                                "where_column" => $ricStrict[0],
+                            ];
+                        }
                     }
                 }
 
@@ -204,7 +224,7 @@ class FormConfigGenerator extends BaseConfigGenerator
         $onSuccessHandlerArr = [];
         switch ($onSuccessHandlerType) {
             case "database":
-                $useMultiplier = $onSuccessHandlerOptions['use_multiplier_on_has'] ?? true;
+
                 $onSuccessHandlerArr = [
                     "type" => "database",
                     "params" => [
@@ -212,7 +232,7 @@ class FormConfigGenerator extends BaseConfigGenerator
                         "pluginName" => $pluginName
                     ],
                 ];
-                if (true === $useMultiplier && true === $isHasTable) {
+                if (true === $useMultiplierOnHas && true === $isHasTable) {
                     if (2 === count($ricStrict)) {
                         list($leftCol, $rightCol) = $ricStrict;
                         $onSuccessHandlerArr['params']['multiplier'] = [
