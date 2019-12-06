@@ -174,9 +174,8 @@ class FormConfigGenerator extends BaseConfigGenerator
                         if (false === $isPivot) {
                             $specialItem['mode'] = 'multiplier';
                             $specialItem['multiplier'] = [
-                                "table" => $table,
+                                "insert_mode" => "insert",
                                 "multiplier_column" => $col,
-                                "where_column" => $ricStrict[0],
                             ];
                         }
                     }
