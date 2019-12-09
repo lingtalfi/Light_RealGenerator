@@ -82,6 +82,10 @@ Related
 History Log
 =============
 
+- 1.16.0 -- 2019-12-09
+
+    - update ListConfigGenerator, added an edit icon for list action
+    
 - 1.15.0 -- 2019-12-06
 
     - update FormConfigGenerator to handle latest form multiplier trick

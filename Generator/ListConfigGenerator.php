@@ -358,6 +358,12 @@ class ListConfigGenerator extends BaseConfigGenerator
                     'csrf_token' => true,
                 ],
                 [
+                    'action_id' => "$pluginName.realist-edit_rows",
+                    'text' => "Edit",
+                    'icon' => "fas fa-edit",
+                    'csrf_token' => true,
+                ],
+                [
                     'text' => "Share",
                     'icon' => "fas fa-share-square",
                     'items' => [
