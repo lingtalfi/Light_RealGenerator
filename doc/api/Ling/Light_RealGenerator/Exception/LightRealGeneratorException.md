@@ -4,7 +4,7 @@
 
 The LightRealGeneratorException class
 ================
-2019-10-24 --> 2019-12-09
+2019-10-24 --> 2019-12-18
 
 
 

@@ -1,6 +1,6 @@
 Light_RealGenerator
 ===========
-2019-10-24
+2019-10-24 -> 2019-12-18
 
 
 
@@ -82,6 +82,10 @@ Related
 History Log
 =============
 
+- 1.17.0 -- 2019-12-18
+
+    - update to accommodate Light_MicroPermission 2.0
+    
 - 1.16.0 -- 2019-12-09
 
     - update ListConfigGenerator, added an edit icon for list action

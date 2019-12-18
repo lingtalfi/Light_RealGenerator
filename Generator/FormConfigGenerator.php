@@ -317,8 +317,6 @@ class FormConfigGenerator extends BaseConfigGenerator
      */
     protected function generateContentByTables(array $tables)
     {
-
-        $pluginName = $this->getKeyValue('plugin_name');
         $specialFields = $this->getKeyValue("form.special_fields", false, []);
         $chloroformExtensions = $specialFields['chloroform_extensions'] ?? [];
         $useTableList = $chloroformExtensions['use_table_list'] ?? true;
@@ -363,7 +361,7 @@ class FormConfigGenerator extends BaseConfigGenerator
                             "column" => $rfCol,
                             "search_column" => $sConcat,
                             "csrf_token" => true,
-                            "micro_permission" => "$pluginName.tables.$rfTable.read",
+                            "micro_permission" => "tables.$rfTable.read",
                         ];
                     }
                 }
