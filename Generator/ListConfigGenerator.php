@@ -116,7 +116,14 @@ class ListConfigGenerator extends BaseConfigGenerator
         $main['ric'] = $tableRic;
         $dbName = $tableInfo['database'];
         $columns = array_merge(array_diff($tableInfo['columns'], $ignoreColumns));
-        $baseFields = $columns;
+
+        $mainTableAlias = $this->findAlias($table);
+
+
+        $baseFields = array_map(function ($v) use ($mainTableAlias) {
+            return $mainTableAlias . "." . $v;
+        }, $columns);
+
         $baseJoins = [];
         $fkToConcat = [];
         $crossColumnLabels = [];
@@ -140,7 +147,6 @@ class ListConfigGenerator extends BaseConfigGenerator
             $tableToAlias = [];
 
             if ($foreignKeysInfo) {
-                $mainTableAlias = $this->findAlias($table);
                 $main['table'] .= " " . $mainTableAlias;
                 $tableToAlias[$dbName . "." . $table] = $mainTableAlias;
 

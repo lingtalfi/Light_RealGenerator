@@ -82,6 +82,10 @@ Related
 History Log
 =============
 
+- 1.18.1 -- 2020-02-26
+
+    - fix ListConfigGenerator->getFileContent, ambiguous column name with joined tables
+    
 - 1.18.0 -- 2020-02-26
 
     - add variables system
