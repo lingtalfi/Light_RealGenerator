@@ -1,6 +1,6 @@
 Light_RealGenerator
 ===========
-2019-10-24 -> 2019-12-18
+2019-10-24 -> 2020-02-26
 
 
 
@@ -82,6 +82,10 @@ Related
 History Log
 =============
 
+- 1.18.0 -- 2020-02-26
+
+    - add variables system
+    
 - 1.17.0 -- 2019-12-18
 
     - update to accommodate Light_MicroPermission 2.0

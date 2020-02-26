@@ -1,6 +1,6 @@
 Light Real Generator
 ================
-2019-10-23
+2019-10-23 -> 2020-02-26
 
 
 
@@ -88,6 +88,42 @@ column, but, I digress.
 
 
 
+
+The variables system
+------------
+2020-02-26
+
+The variables system lets you declare and reuse some custom strings, so that you can inject them wherever you want in the configuration file.
+To use the variables system, declare your variables as a key/value array at the root level, then to use a variable anywhere in the configuration file,
+just use the special variable notation described below.
+
+
+### Declaring variables example
+
+```yaml
+main:
+    variables:
+        plugin: Light_Kit_Admin_UserData
+        abc: 123
+# ...
+```
+
+
+### Using variables in fhe configuration file
+
+```yaml
+
+main:
+# ...
+    list:
+        target_dir: {app_dir}/config/data/{$plugin}/Light_Realist/generated
+# ...
+
+```
+
+
+
+ 
 
 
 

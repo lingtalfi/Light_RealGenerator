@@ -56,6 +56,18 @@ class LightRealGeneratorService
             $genConf = $conf[$identifier];
 
 
+            // replacing variables now
+            $variables = $genConf['variables'] ?? [];
+            array_walk_recursive($genConf, function (&$v) use (&$n, $variables) {
+                foreach ($variables as $variable => $value) {
+                    if (false !== strpos($v, '{$' . $variable . '}')) {
+                        $v = str_replace('{$' . $variable . '}', $value, $v);
+                    }
+                }
+            });
+
+
+
             if (array_key_exists("list", $genConf)) {
                 $listGenerator = new ListConfigGenerator();
                 $listGenerator->setContainer($this->container);
