@@ -82,6 +82,10 @@ Related
 History Log
 =============
 
+- 1.18.2 -- 2020-02-26
+
+    - fix ListConfigGenerator->getFileContent, ambiguous column name with joined tables in where clause too
+    
 - 1.18.1 -- 2020-02-26
 
     - fix ListConfigGenerator->getFileContent, ambiguous column name with joined tables

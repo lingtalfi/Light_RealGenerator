@@ -64,7 +64,7 @@ Exceptions thrown
 
 Source Code
 ===========
-See the source code for method [ListConfigGenerator::convertTypeAliases](https://github.com/lingtalfi/Light_RealGenerator/blob/master/Generator/ListConfigGenerator.php#L630-L649)
+See the source code for method [ListConfigGenerator::convertTypeAliases](https://github.com/lingtalfi/Light_RealGenerator/blob/master/Generator/ListConfigGenerator.php#L636-L655)
 
 
 See Also

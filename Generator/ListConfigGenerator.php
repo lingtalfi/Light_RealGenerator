@@ -259,12 +259,18 @@ class ListConfigGenerator extends BaseConfigGenerator
                     $sGeneralSearch .= ' or' . PHP_EOL;
                 }
 
+                $hasConcat = false;
                 if (true === $useCrossColumns) {
                     if (array_key_exists($col, $fkToConcat)) {
                         $col = $fkToConcat[$col];
+                        $hasConcat = true;
                     }
                 }
-                $sGeneralSearch .= "$col like :%expression%";
+                if (false === $hasConcat) {
+                    $sGeneralSearch .= "$mainTableAlias.$col like :%expression%";
+                } else {
+                    $sGeneralSearch .= "$col like :%expression%";
+                }
             }
 
             $main['where'] = [
@@ -283,8 +289,8 @@ class ListConfigGenerator extends BaseConfigGenerator
             $main['where']['and'] = 'and';
             $main['where']['or'] = 'or';
 
-            $sInRics = implode(' and ', array_map(function ($v) {
-                return "$v like :$v";
+            $sInRics = implode(' and ', array_map(function ($v) use ($mainTableAlias) {
+                return "$mainTableAlias.$v like :$v";
             }, $tableRic));
             $main['where']['in_rics'] = '(' . $sInRics . ')';
 

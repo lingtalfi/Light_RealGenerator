@@ -49,7 +49,7 @@ Returns string.
 
 Source Code
 ===========
-See the source code for method [ListConfigGenerator::getOpenAdminDataTypeBySqlType](https://github.com/lingtalfi/Light_RealGenerator/blob/master/Generator/ListConfigGenerator.php#L556-L589)
+See the source code for method [ListConfigGenerator::getOpenAdminDataTypeBySqlType](https://github.com/lingtalfi/Light_RealGenerator/blob/master/Generator/ListConfigGenerator.php#L562-L595)
 
 
 See Also
