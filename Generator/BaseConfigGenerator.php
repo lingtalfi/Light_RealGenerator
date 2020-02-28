@@ -9,6 +9,7 @@ use Ling\Bat\CaseTool;
 use Ling\Light\ServiceContainer\LightServiceContainerInterface;
 use Ling\Light_DatabaseInfo\Service\LightDatabaseInfoService;
 use Ling\Light_RealGenerator\Exception\LightRealGeneratorException;
+use Ling\SqlWizard\Tool\SqlWizardGeneralTool;
 
 /**
  * The BaseConfigGenerator class.
@@ -171,6 +172,7 @@ class BaseConfigGenerator
         }
         return $table;
     }
+
 
 
     /**

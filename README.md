@@ -1,6 +1,6 @@
 Light_RealGenerator
 ===========
-2019-10-24 -> 2020-02-26
+2019-10-24 -> 2020-02-28
 
 
 
@@ -82,6 +82,11 @@ Related
 History Log
 =============
 
+- 1.19.0 -- 2020-02-28
+
+    - add list config properties, such as cross_column_hub_link_table_prefix_2_plugin 
+    - fix ListConfigGenerator->getFileContent, generating incorrect operator_and_value.value option instead of operator_and_value.target
+    
 - 1.18.2 -- 2020-02-26
 
     - fix ListConfigGenerator->getFileContent, ambiguous column name with joined tables in where clause too

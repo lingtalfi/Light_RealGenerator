@@ -51,7 +51,7 @@ Returns string.
 
 Source Code
 ===========
-See the source code for method [ListConfigGenerator::findRepresentativeColumnAlias](https://github.com/lingtalfi/Light_RealGenerator/blob/master/Generator/ListConfigGenerator.php#L712-L727)
+See the source code for method [ListConfigGenerator::findRepresentativeColumnAlias](https://github.com/lingtalfi/Light_RealGenerator/blob/master/Generator/ListConfigGenerator.php#L726-L741)
 
 
 See Also

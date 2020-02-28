@@ -9,7 +9,7 @@ Below is it's babyYaml form, commented, which serves as the reference documentat
 
 
 
-```txt
+```yaml
 main:
     # This is optional. Under the hood, the real generator uses the Light_Database plugin to interact with the database,
     # and so the default value will be the one defined by the Light_Database plugin.
@@ -70,6 +70,16 @@ main:
     #       More info about pascal case here: https://github.com/lingtalfi/ConventionGuy/blob/master/nomenclature.stringCases.eng.md#pascalcase
     list:
 
+
+        # The name of the plugin who handles the list actions. By default, it's the plugin name defined with the
+        # plugin_name option (at the root level of this file).
+        ?list_action_groups_plugin_name: Light_Kit_Admin
+
+        # The name of the plugin who handles the list general actions. By default, it's the plugin name defined with the
+        # plugin_name option (at the root level of this file).
+        ?list_general_actions_plugin_name: Light_Kit_Admin
+
+
         # The target_dir is the path of the dir where to generate the files
         # It's an absolute path.
         # The tag {app_dir} can be used, and will be replaced with the actual "application root directory".
@@ -129,6 +139,12 @@ main:
         # - Generated/{Table}Controller
         # 
         ?cross_column_hub_link_controller_format: Generated/{Table}Controller
+
+        # An array of tablePrefix => pluginName, used to generate the plugin parameter of the in the built-in Light_Realist.hub_link column transformer for cross columns.
+        # By default it's an empty array, which means the current plugin will be always used.
+        ?cross_column_hub_link_table_prefix_2_plugin: []
+            lud: Light_Kit_Admin
+
 
         # The name of the action column (only if use_action_column=true). Defaults to "action".
         # Tip: the default value is set by the LightRealistService->executeRequestById method.

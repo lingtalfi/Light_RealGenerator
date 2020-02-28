@@ -11,6 +11,7 @@ use Ling\Bat\FileSystemTool;
 use Ling\Light_DatabaseInfo\Service\LightDatabaseInfoService;
 use Ling\Light_RealGenerator\Exception\LightRealGeneratorException;
 use Ling\Light_RealGenerator\Util\RepresentativeColumnFinderUtil;
+use Ling\SqlWizard\Tool\SqlWizardGeneralTool;
 
 /**
  * The ListConfigGenerator class.
@@ -80,6 +81,8 @@ class ListConfigGenerator extends BaseConfigGenerator
         $main['table'] = $table;
         $database = $this->getKeyValue('database_name', false, null);
         $pluginName = $this->getKeyValue('plugin_name');
+        $listActionGroupsPluginName = $this->getKeyValue('list.list_action_groups_plugin_name', false, $pluginName);
+        $listGeneralActionsPluginName = $this->getKeyValue('list.list_general_actions_plugin_name', false, $pluginName);
         $useMicroPermission = $this->getKeyValue('list.use_micro_permission', false, true);
         $ignoreColumns = $this->getKeyValue("list.ignore_columns.$table", false, []);
         $globalIgnoreColumns = $this->getKeyValue("ignore_columns.$table", false, []);
@@ -101,6 +104,7 @@ class ListConfigGenerator extends BaseConfigGenerator
         $useCrossColumns = $this->getKeyValue("list.use_cross_columns", false, true);
         $crossColumnFkFormat = $this->getKeyValue("list.cross_column_fk_format", false, 'concat($fk, \'. \', $rc)');
         $crossColumnHubLinkControllerFormat = $this->getKeyValue("list.cross_column_hub_link_controller_format", false, 'Generated/{Table}Controller');
+        $crossColumnHubLinkTablePrefix2Plugin = $this->getKeyValue("list.cross_column_hub_link_table_prefix_2_plugin", false, []);
         $relatedLinks = $this->getKeyValue("list.related_links", false, []);
         $listTitle = $this->getKeyValue("list.title", false, "{Label} list");
 
@@ -206,6 +210,14 @@ class ListConfigGenerator extends BaseConfigGenerator
                     //--------------------------------------------
                     // render types
                     //--------------------------------------------
+
+                    $crossColumnPluginName = $pluginName;
+                    $fkTablePrefix = SqlWizardGeneralTool::getTablePrefix($rfTable);
+                    if (null !== $fkTablePrefix && array_key_exists($fkTablePrefix, $crossColumnHubLinkTablePrefix2Plugin)) {
+                        $crossColumnPluginName = $crossColumnHubLinkTablePrefix2Plugin[$fkTablePrefix];
+                    }
+
+
                     $fkCrossColumnRenderTypes[$crossColumnAlias] = [
                         "type" => "Light_Realist.hub_link",
                         "text" => null,
@@ -218,12 +230,12 @@ class ListConfigGenerator extends BaseConfigGenerator
                             $rfCol => $fk,
                         ],
                         "url_params" => [
+                            'plugin' => $crossColumnPluginName,
                             'controller' => str_replace([
                                 '{Table}',
                             ], [
                                 $rfTablePascalCase,
                             ], $crossColumnHubLinkControllerFormat),
-                            'plugin' => $pluginName,
                             'm' => "f",
                         ],
                     ];
@@ -315,7 +327,7 @@ class ListConfigGenerator extends BaseConfigGenerator
                     "generic_filter" => [
                         "operator_and_value" => [
                             "source" => "operator",
-                            "value" => "operator_value",
+                            "target" => "operator_value",
                         ],
                     ],
                 ],
@@ -338,19 +350,19 @@ class ListConfigGenerator extends BaseConfigGenerator
             //--------------------------------------------
             $listGeneralActions = [
                 [
-                    'action_id' => "$pluginName.realist-generate_random_rows",
+                    'action_id' => "$listGeneralActionsPluginName.realist-generate_random_rows",
                     'text' => "Generate",
                     'icon' => "fas fa-spray-can",
                     'csrf_token' => true,
                 ],
                 [
-                    'action_id' => "$pluginName.realist-save_table",
+                    'action_id' => "$listGeneralActionsPluginName.realist-save_table",
                     'text' => "Save table content",
                     'icon' => "fas fa-download",
                     'csrf_token' => true,
                 ],
                 [
-                    'action_id' => "$pluginName.realist-load_table",
+                    'action_id' => "$listGeneralActionsPluginName.realist-load_table",
                     'text' => "Load table content",
                     'icon' => "fas fa-upload",
                     'csrf_token' => true,
@@ -358,19 +370,19 @@ class ListConfigGenerator extends BaseConfigGenerator
             ];
             $listActionGroups = [
                 [
-                    'action_id' => "$pluginName.realist-print",
+                    'action_id' => "$listActionGroupsPluginName.realist-print",
                     'text' => "Print",
                     'icon' => "fas fa-print",
                     'csrf_token' => true,
                 ],
                 [
-                    'action_id' => "$pluginName.realist-delete_rows",
+                    'action_id' => "$listActionGroupsPluginName.realist-delete_rows",
                     'text' => "Delete",
                     'icon' => "far fa-trash-alt",
                     'csrf_token' => true,
                 ],
                 [
-                    'action_id' => "$pluginName.realist-edit_rows",
+                    'action_id' => "$listActionGroupsPluginName.realist-edit_rows",
                     'text' => "Edit",
                     'icon' => "fas fa-edit",
                     'csrf_token' => true,
@@ -380,37 +392,37 @@ class ListConfigGenerator extends BaseConfigGenerator
                     'icon' => "fas fa-share-square",
                     'items' => [
                         [
-                            'action_id' => "$pluginName.realist-rows_to_ods",
+                            'action_id' => "$listActionGroupsPluginName.realist-rows_to_ods",
                             'text' => "OpenOffice ods",
                             'icon' => "far fa-file-alt",
                             'csrf_token' => true,
                         ],
                         [
-                            'action_id' => "$pluginName.realist-rows_to_xlsx",
+                            'action_id' => "$listActionGroupsPluginName.realist-rows_to_xlsx",
                             'text' => "Excel xlsx",
                             'icon' => "far fa-file-excel",
                             'csrf_token' => true,
                         ],
                         [
-                            'action_id' => "$pluginName.realist-rows_to_xls",
+                            'action_id' => "$listActionGroupsPluginName.realist-rows_to_xls",
                             'text' => "Excel xls",
                             'icon' => "far fa-file-excel",
                             'csrf_token' => true,
                         ],
                         [
-                            'action_id' => "$pluginName.realist-rows_to_html",
+                            'action_id' => "$listActionGroupsPluginName.realist-rows_to_html",
                             'text' => "Html",
                             'icon' => "far fa-file-code",
                             'csrf_token' => true,
                         ],
                         [
-                            'action_id' => "$pluginName.realist-rows_to_csv",
+                            'action_id' => "$listActionGroupsPluginName.realist-rows_to_csv",
                             'text' => "Csv",
                             'icon' => "fas fa-file-csv",
                             'csrf_token' => true,
                         ],
                         [
-                            'action_id' => "$pluginName.realist-rows_to_pdf",
+                            'action_id' => "$listActionGroupsPluginName.realist-rows_to_pdf",
                             'text' => "Pdf",
                             'icon' => "far fa-file-pdf",
                             'csrf_token' => true,
@@ -459,7 +471,9 @@ class ListConfigGenerator extends BaseConfigGenerator
             $rowsRendererTypes = array_replace($rowsRendererTypesGeneral, $rowsRendererTypesSpecific);
             $this->convertTypeAliases($rowsRendererTypes, $rowsRendererTypeAliases, $table);
 
+
             $rowsRendererTypes = array_merge($rowsRendererTypes, $fkCrossColumnRenderTypes);
+
 
             if ($rowsRendererTypes) {
                 $rowsRenderer['types'] = $rowsRendererTypes;
