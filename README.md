@@ -1,6 +1,6 @@
 Light_RealGenerator
 ===========
-2019-10-24 -> 2020-02-28
+2019-10-24 -> 2020-03-03
 
 
 
@@ -82,6 +82,10 @@ Related
 History Log
 =============
 
+- 1.19.1 -- 2020-03-03
+
+    - fix ListConfigGenerator not generating table alias for non crossed columns
+    
 - 1.19.0 -- 2020-02-28
 
     - add list config properties, such as cross_column_hub_link_table_prefix_2_plugin 

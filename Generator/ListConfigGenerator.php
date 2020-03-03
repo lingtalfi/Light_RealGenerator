@@ -122,6 +122,7 @@ class ListConfigGenerator extends BaseConfigGenerator
         $columns = array_merge(array_diff($tableInfo['columns'], $ignoreColumns));
 
         $mainTableAlias = $this->findAlias($table);
+        $main['table'] .= " " . $mainTableAlias;
 
 
         $baseFields = array_map(function ($v) use ($mainTableAlias) {
@@ -151,7 +152,6 @@ class ListConfigGenerator extends BaseConfigGenerator
             $tableToAlias = [];
 
             if ($foreignKeysInfo) {
-                $main['table'] .= " " . $mainTableAlias;
                 $tableToAlias[$dbName . "." . $table] = $mainTableAlias;
 
                 foreach ($foreignKeysInfo as $fk => $referencedInfo) {
