@@ -107,6 +107,8 @@ class ListConfigGenerator extends BaseConfigGenerator
         $crossColumnHubLinkTablePrefix2Plugin = $this->getKeyValue("list.cross_column_hub_link_table_prefix_2_plugin", false, []);
         $relatedLinks = $this->getKeyValue("list.related_links", false, []);
         $listTitle = $this->getKeyValue("list.title", false, "{Label} list");
+        $useRowRestriction = $this->getKeyValue("list.use_row_restriction", false, false);
+        $queryErrorShowDebugInfo = $this->getKeyValue("list.query_error_show_debug_info", false, false);
 
 
         $ignoreColumns = array_unique(array_merge($globalIgnoreColumns, $ignoreColumns));
@@ -343,6 +345,8 @@ class ListConfigGenerator extends BaseConfigGenerator
                 "value" => 'REALIST(Light_Realist, csrf_token, realist-request)',
             ];
             $main['use_micro_permission'] = $useMicroPermission;
+            $main['use_row_restriction'] = $useRowRestriction;
+            $main['query_error_show_debug_info'] = $queryErrorShowDebugInfo;
 
 
             //--------------------------------------------
