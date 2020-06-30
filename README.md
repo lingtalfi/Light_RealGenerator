@@ -1,6 +1,6 @@
 Light_RealGenerator
 ===========
-2019-10-24 -> 2020-03-10
+2019-10-24 -> 2020-06-30
 
 
 
@@ -55,6 +55,22 @@ real_generator:
     methods:
         setContainer:
             container: @container()
+
+
+# --------------------------------------
+# hooks
+# --------------------------------------
+$logger.methods_collection:
+    -
+        method: addListener
+        args:
+            channels: real_generator.debug
+            listener:
+                instance: Ling\Light_Logger\Listener\LightCleanableFileLoggerListener
+                methods:
+                    configure:
+                        options:
+                            file: ${app_dir}/log/real_generator_debug.txt
 ```
 
 
@@ -81,6 +97,10 @@ Related
 
 History Log
 =============
+
+- 1.21.0 -- 2020-06-30
+
+    - update generator, add log system 
 
 - 1.20.0 -- 2020-03-10
 

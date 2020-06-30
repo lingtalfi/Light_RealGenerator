@@ -1,6 +1,6 @@
 Light Real Generator
 ================
-2019-10-23 -> 2020-02-26
+2019-10-23 -> 2020-06-30
 
 
 
@@ -123,7 +123,20 @@ main:
 
 
 
- 
+Logs
+----------
+2020-06-30
+
+
+We believe in logs.
+
+We use the [Light_Logger](https://github.com/lingtalfi/Light_Logger) plugin under the hood to provide a debugging mechanism, should you need to examine what we are doing in more details.
+
+To enable the debug messages, you need to set the **useDebug** option to true, at our service configuration level.
+
+By default, we send debug messages via the **real_generator.debug** channel, but you can change it via the options. See the api documentation for more details. 
+
+Our service also exposes a **debugLog** method, if you want to write to our log (this is mainly intended for plugin authors who extend our service classes). 
 
 
 

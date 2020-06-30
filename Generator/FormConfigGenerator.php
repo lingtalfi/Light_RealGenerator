@@ -33,6 +33,10 @@ class FormConfigGenerator extends BaseConfigGenerator
         $targetDir = $this->getKeyValue("form.target_dir");
         $targetDir = str_replace('{app_dir}', $appDir, $targetDir);
 
+
+        $this->debugLog("Generating " . count($tables) . " form config(s) in the following directory: $targetDir.");
+
+
         foreach ($tables as $table) {
             $content = $this->getFileContent($table);
             $fileName = $table . ".byml";

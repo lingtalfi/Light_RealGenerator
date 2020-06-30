@@ -6,6 +6,7 @@ namespace Ling\Light_RealGenerator\Service;
 
 use Ling\BabyYaml\BabyYamlUtil;
 use Ling\Light\ServiceContainer\LightServiceContainerInterface;
+use Ling\Light_Logger\LightLoggerService;
 use Ling\Light_RealGenerator\Exception\LightRealGeneratorException;
 use Ling\Light_RealGenerator\Generator\FormConfigGenerator;
 use Ling\Light_RealGenerator\Generator\ListConfigGenerator;
@@ -23,6 +24,25 @@ class LightRealGeneratorService
      */
     protected $container;
 
+    /**
+     * This property holds the options for this instance.
+     *
+     * Available options are:
+     *
+     * - useDebug: bool = false.
+     *      Whether to log debug messages to the logs.
+     *      If true, the debug messages are sent via the channel specified with the debugLogChannel option.
+     *
+     * - debugLogChannel: string=real_generator.debug, the channel used to write the log messages.
+     *
+     *
+     *
+     *
+     *
+     * @var array
+     */
+    protected $options;
+
 
     /**
      * Builds the LightRealGeneratorService instance.
@@ -30,6 +50,7 @@ class LightRealGeneratorService
     public function __construct()
     {
         $this->container = null;
+        $this->options = [];
     }
 
 
@@ -52,6 +73,12 @@ class LightRealGeneratorService
         }
 
 
+        $this->debugLog("--clean--"); // reinitializing the log file
+        $this->debugLog("Launching real_generator with identifier=\"$identifier\" and file=\"$file\".");
+
+
+
+
         if (array_key_exists($identifier, $conf)) {
             $genConf = $conf[$identifier];
 
@@ -67,17 +94,28 @@ class LightRealGeneratorService
             });
 
 
+            $debugCallable = [$this, "debugLog"];
+
 
             if (array_key_exists("list", $genConf)) {
+                $this->debugLog("List configuration found.");
                 $listGenerator = new ListConfigGenerator();
+                $listGenerator->setDebugCallable($debugCallable);
                 $listGenerator->setContainer($this->container);
                 $listGenerator->generate($genConf);
+            } else {
+                $this->debugLog("No list configuration found.");
             }
 
+
             if (array_key_exists("form", $genConf)) {
+                $this->debugLog("Form configuration found.");
                 $formGenerator = new FormConfigGenerator();
+                $formGenerator->setDebugCallable($debugCallable);
                 $formGenerator->setContainer($this->container);
                 $formGenerator->generate($genConf);
+            } else {
+                $this->debugLog("No form configuration found.");
             }
 
 
@@ -103,6 +141,36 @@ class LightRealGeneratorService
         $this->container = $container;
     }
 
+    /**
+     * Sets the options.
+     *
+     * @param array $options
+     */
+    public function setOptions(array $options)
+    {
+        $this->options = $options;
+    }
+
+
+    /**
+     * Sends a message to the debugLog, if the **useDebug** option is set to true.
+     *
+     * @param string $msg
+     */
+    public function debugLog(string $msg)
+    {
+        $useDebug = $this->options['useDebug'] ?? false;
+        if (true === $useDebug) {
+
+            /**
+             * @var $logger LightLoggerService
+             */
+            $channel = $this->options['debugLogChannel'] ?? "real_generator.debug";
+            $logger = $this->container->get("logger");
+            $logger->log($msg, $channel);
+        }
+    }
+
 
 
 
@@ -117,6 +185,7 @@ class LightRealGeneratorService
      */
     protected function error(string $msg)
     {
+        $this->debugLog("Error: " . $msg);
         throw new LightRealGeneratorException($msg);
     }
 

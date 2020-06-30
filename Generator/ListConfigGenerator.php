@@ -39,12 +39,15 @@ class ListConfigGenerator extends BaseConfigGenerator
      */
     public function generate(array $config)
     {
+
         $this->setConfig($config);
         $tables = $this->getTables();
 
         $appDir = $this->container->getApplicationDir();
         $targetDir = $this->getKeyValue("list.target_dir");
         $targetDir = str_replace('{app_dir}', $appDir, $targetDir);
+
+        $this->debugLog("Generating " . count($tables) . " list config(s) in the following directory: $targetDir.");
 
         foreach ($tables as $table) {
             $content = $this->getFileContent($table);

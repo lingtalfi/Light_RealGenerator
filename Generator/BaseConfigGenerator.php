@@ -9,7 +9,6 @@ use Ling\Bat\CaseTool;
 use Ling\Light\ServiceContainer\LightServiceContainerInterface;
 use Ling\Light_DatabaseInfo\Service\LightDatabaseInfoService;
 use Ling\Light_RealGenerator\Exception\LightRealGeneratorException;
-use Ling\SqlWizard\Tool\SqlWizardGeneralTool;
 
 /**
  * The BaseConfigGenerator class.
@@ -30,6 +29,15 @@ class BaseConfigGenerator
      */
     protected $config;
 
+
+    /**
+     * This function to call for debugging log messages.
+     *
+     *
+     * @var callable = null
+     */
+    protected $debugCallable;
+
     /**
      * Builds the ListConfigGenerator instance.
      */
@@ -37,6 +45,7 @@ class BaseConfigGenerator
     {
         $this->container = null;
         $this->config = [];
+        $this->debugCallable = null;
     }
 
 
@@ -55,9 +64,33 @@ class BaseConfigGenerator
         $this->container = $container;
     }
 
+    /**
+     * Sets the debugCallable.
+     *
+     * @param callable $debugCallable
+     */
+    public function setDebugCallable(callable $debugCallable)
+    {
+        $this->debugCallable = $debugCallable;
+    }
+
+
     //--------------------------------------------
     //
     //--------------------------------------------
+    /**
+     * Calls the debugCallable function if set.
+     *
+     * @param string $msg
+     */
+    protected function debugLog(string $msg)
+    {
+        if (null !== $this->debugCallable) {
+            call_user_func($this->debugCallable, $msg);
+        }
+    }
+
+
     /**
      * Returns the tables to generate a config file for.
      * @return array
@@ -172,7 +205,6 @@ class BaseConfigGenerator
         }
         return $table;
     }
-
 
 
     /**
