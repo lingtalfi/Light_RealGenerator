@@ -54,7 +54,7 @@ Exceptions thrown
 
 Source Code
 ===========
-See the source code for method [BaseConfigGenerator::isHasTable](https://github.com/lingtalfi/Light_RealGenerator/blob/master/Generator/BaseConfigGenerator.php#L216-L227)
+See the source code for method [BaseConfigGenerator::isHasTable](https://github.com/lingtalfi/Light_RealGenerator/blob/master/Generator/BaseConfigGenerator.php#L237-L248)
 
 
 See Also

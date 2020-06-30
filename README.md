@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.22.0 -- 2020-06-30
+
+    - update generator logs, now uses symbolic path to make it more readable 
+    
 - 1.21.0 -- 2020-06-30
 
     - update generator, add log system 

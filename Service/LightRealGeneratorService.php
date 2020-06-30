@@ -74,9 +74,7 @@ class LightRealGeneratorService
 
 
         $this->debugLog("--clean--"); // reinitializing the log file
-        $this->debugLog("Launching real_generator with identifier=\"$identifier\" and file=\"$file\".");
-
-
+        $this->debugLog("Launching real_generator with identifier=\"$identifier\" and file=\"" . $this->getSymbolicPath(realpath($file)) . "\".");
 
 
         if (array_key_exists($identifier, $conf)) {
@@ -177,6 +175,28 @@ class LightRealGeneratorService
     //--------------------------------------------
     //
     //--------------------------------------------
+
+    /**
+     * Returns the given absolute path, with the application directory replaced by a symbol if found.
+     * If not, the path is returned as is.
+     *
+     *
+     * For instance: [app]/my/image.png
+     *
+     * @param string $path
+     * @return string
+     */
+    protected function getSymbolicPath(string $path): string
+    {
+        $appDir = $this->container->getApplicationDir();
+        $p = explode($appDir, $path, 2);
+        if (2 === count($p)) {
+            return '[app]' . array_pop($p);
+        }
+        return $path;
+    }
+
+
     /**
      * Throws an exception with the given error message.
      *

@@ -47,7 +47,7 @@ class ListConfigGenerator extends BaseConfigGenerator
         $targetDir = $this->getKeyValue("list.target_dir");
         $targetDir = str_replace('{app_dir}', $appDir, $targetDir);
 
-        $this->debugLog("Generating " . count($tables) . " list config(s) in the following directory: $targetDir.");
+        $this->debugLog("Generating " . count($tables) . " list config(s) in the following directory: ". $this->getSymbolicPath($targetDir) .".");
 
         foreach ($tables as $table) {
             $content = $this->getFileContent($table);

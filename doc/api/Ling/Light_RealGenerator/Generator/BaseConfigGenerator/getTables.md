@@ -51,7 +51,7 @@ Exceptions thrown
 
 Source Code
 ===========
-See the source code for method [BaseConfigGenerator::getTables](https://github.com/lingtalfi/Light_RealGenerator/blob/master/Generator/BaseConfigGenerator.php#L99-L134)
+See the source code for method [BaseConfigGenerator::getTables](https://github.com/lingtalfi/Light_RealGenerator/blob/master/Generator/BaseConfigGenerator.php#L120-L155)
 
 
 See Also
@@ -59,5 +59,5 @@ See Also
 
 The [BaseConfigGenerator](https://github.com/lingtalfi/Light_RealGenerator/blob/master/doc/api/Ling/Light_RealGenerator/Generator/BaseConfigGenerator.md) class.
 
-Previous method: [debugLog](https://github.com/lingtalfi/Light_RealGenerator/blob/master/doc/api/Ling/Light_RealGenerator/Generator/BaseConfigGenerator/debugLog.md)<br>Next method: [getKeyValue](https://github.com/lingtalfi/Light_RealGenerator/blob/master/doc/api/Ling/Light_RealGenerator/Generator/BaseConfigGenerator/getKeyValue.md)<br>
+Previous method: [getSymbolicPath](https://github.com/lingtalfi/Light_RealGenerator/blob/master/doc/api/Ling/Light_RealGenerator/Generator/BaseConfigGenerator/getSymbolicPath.md)<br>Next method: [getKeyValue](https://github.com/lingtalfi/Light_RealGenerator/blob/master/doc/api/Ling/Light_RealGenerator/Generator/BaseConfigGenerator/getKeyValue.md)<br>
 

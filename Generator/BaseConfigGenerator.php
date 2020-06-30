@@ -92,6 +92,27 @@ class BaseConfigGenerator
 
 
     /**
+     * Returns the given absolute path, with the application directory replaced by a symbol if found.
+     * If not, the path is returned as is.
+     *
+     *
+     * For instance: [app]/my/image.png
+     *
+     * @param string $path
+     * @return string
+     */
+    protected function getSymbolicPath(string $path): string
+    {
+        $appDir = $this->container->getApplicationDir();
+        $p = explode($appDir, $path, 2);
+        if (2 === count($p)) {
+            return '[app]' . array_pop($p);
+        }
+        return $path;
+    }
+
+
+    /**
      * Returns the tables to generate a config file for.
      * @return array
      * @throws \Exception

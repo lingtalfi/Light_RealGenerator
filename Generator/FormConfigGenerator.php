@@ -34,7 +34,7 @@ class FormConfigGenerator extends BaseConfigGenerator
         $targetDir = str_replace('{app_dir}', $appDir, $targetDir);
 
 
-        $this->debugLog("Generating " . count($tables) . " form config(s) in the following directory: $targetDir.");
+        $this->debugLog("Generating " . count($tables) . " form config(s) in the following directory: " . $this->getSymbolicPath($targetDir) . ".");
 
 
         foreach ($tables as $table) {

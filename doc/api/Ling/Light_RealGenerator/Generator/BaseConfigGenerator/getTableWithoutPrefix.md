@@ -54,7 +54,7 @@ Exceptions thrown
 
 Source Code
 ===========
-See the source code for method [BaseConfigGenerator::getTableWithoutPrefix](https://github.com/lingtalfi/Light_RealGenerator/blob/master/Generator/BaseConfigGenerator.php#L198-L207)
+See the source code for method [BaseConfigGenerator::getTableWithoutPrefix](https://github.com/lingtalfi/Light_RealGenerator/blob/master/Generator/BaseConfigGenerator.php#L219-L228)
 
 
 See Also
