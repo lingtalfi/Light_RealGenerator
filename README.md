@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.23.2 -- 2020-07-02
+
+    - fix LightRealGeneratorService->generate not replacing multiple variables in the same string
+    
 - 1.23.1 -- 2020-07-02
 
     - fix LightRealGeneratorService->generate not replacing string variables correctly

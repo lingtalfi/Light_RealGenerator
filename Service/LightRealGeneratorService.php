@@ -86,18 +86,29 @@ class LightRealGeneratorService
             // replacing variables now
             $variables = $genConf['variables'] ?? [];
 
-
             $replaceFn = function ($value, $isValue = false) use ($variables) {
-                if (preg_match('!\{\$([a-zA-Z0-9_]*)\}!', $value, $match)) {
-                    $varName = $match[1];
-                    if (array_key_exists($varName, $variables)) {
 
-                        $newValue = $variables[$varName];
-                        if (true === $isValue && is_scalar($newValue)) {
-                            $newValue = str_replace('{$' . $varName . '}', $newValue, $value);
+                if (preg_match_all('!\{\$([a-zA-Z0-9_]*)\}!', $value, $matches)) {
+
+                    $varNames = $matches[1];
+                    $ret = $value;
+
+
+                    foreach ($varNames as $varName) {
+                        if (array_key_exists($varName, $variables)) {
+                            $newValue = $variables[$varName];
+                            if (true === $isValue) {
+                                if (true === is_scalar($newValue)) {
+                                    $ret = str_replace('{$' . $varName . '}', $newValue, $ret);
+                                } else {
+                                    $ret = $newValue;
+                                }
+                            } else {
+                                $ret = str_replace('{$' . $varName . '}', $newValue, $ret);
+                            }
                         }
-                        return $newValue;
                     }
+                    return $ret;
                 }
                 return $value;
             };
@@ -111,12 +122,14 @@ class LightRealGeneratorService
             });
 
 
+
             /**
              * replacing values
              */
             BDotTool::walk($genConf, function (&$v) use ($replaceFn) {
                 $v = $replaceFn($v, true);
             });
+
 
 
 
