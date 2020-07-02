@@ -5,6 +5,8 @@ namespace Ling\Light_RealGenerator\Service;
 
 
 use Ling\BabyYaml\BabyYamlUtil;
+use Ling\Bat\ArrayTool;
+use Ling\Bat\BDotTool;
 use Ling\Light\ServiceContainer\LightServiceContainerInterface;
 use Ling\Light_Logger\LightLoggerService;
 use Ling\Light_RealGenerator\Exception\LightRealGeneratorException;
@@ -83,13 +85,34 @@ class LightRealGeneratorService
 
             // replacing variables now
             $variables = $genConf['variables'] ?? [];
-            array_walk_recursive($genConf, function (&$v) use (&$n, $variables) {
-                foreach ($variables as $variable => $value) {
-                    if (false !== strpos($v, '{$' . $variable . '}')) {
-                        $v = str_replace('{$' . $variable . '}', $value, $v);
+
+
+            $replaceFn = function ($value) use ($variables) {
+                if (preg_match('!\{\$([a-zA-Z0-9_]*)\}!', $value, $match)) {
+                    $varName = $match[1];
+                    if (array_key_exists($varName, $variables)) {
+                        return $variables[$varName]; // assuming this is a string
                     }
                 }
+                return $value;
+            };
+
+
+            /**
+             * replacing keys
+             */
+            ArrayTool::arrayWalkKeysRecursive($genConf, function ($key) use ($variables, $replaceFn) {
+                return $replaceFn($key);
             });
+
+
+            /**
+             * replacing values
+             */
+            BDotTool::walk($genConf, function (&$v) use ($replaceFn) {
+                $v = $replaceFn($v);
+            });
+
 
 
             $debugCallable = [$this, "debugLog"];

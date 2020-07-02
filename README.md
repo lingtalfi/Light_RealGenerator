@@ -1,6 +1,6 @@
 Light_RealGenerator
 ===========
-2019-10-24 -> 2020-06-30
+2019-10-24 -> 2020-07-02
 
 
 
@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.23.0 -- 2020-07-02
+
+    - update LightRealGeneratorService, now can use variables to replace keys, and non-scalar are accepted for values replacement 
+    
 - 1.22.0 -- 2020-06-30
 
     - update generator logs, now uses symbolic path to make it more readable 

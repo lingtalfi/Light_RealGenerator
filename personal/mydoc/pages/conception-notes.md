@@ -1,6 +1,6 @@
 Light Real Generator
 ================
-2019-10-23 -> 2020-06-30
+2019-10-23 -> 2020-07-02
 
 
 
@@ -91,9 +91,10 @@ column, but, I digress.
 
 The variables system
 ------------
-2020-02-26
+2020-02-26 -> 2020-07-02
 
-The variables system lets you declare and reuse some custom strings, so that you can inject them wherever you want in the configuration file.
+The variables system lets you declare some custom variables, and inject them wherever you want in the configuration file.
+
 To use the variables system, declare your variables as a key/value array at the root level, then to use a variable anywhere in the configuration file,
 just use the special variable notation described below.
 
@@ -105,6 +106,11 @@ main:
     variables:
         plugin: Light_Kit_Admin_UserData
         abc: 123
+        myKey: sport
+        # you can inject non-scalar values if you want
+        fruits:  
+            - apple
+            - banana
 # ...
 ```
 
@@ -120,6 +126,25 @@ main:
 # ...
 
 ```
+
+
+### Replacing keys
+
+You can also replace a key of an array by a variable, like this:
+
+```yaml
+
+main:
+# ...
+    list:
+        {myKey}: judo 
+# ...
+
+```
+
+
+
+
 
 
 
