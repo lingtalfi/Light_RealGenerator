@@ -39,7 +39,6 @@ class ListConfigGenerator extends BaseConfigGenerator
      */
     public function generate(array $config)
     {
-
         $this->setConfig($config);
         $tables = $this->getTables();
 

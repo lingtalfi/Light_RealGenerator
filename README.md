@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.23.1 -- 2020-07-02
+
+    - fix LightRealGeneratorService->generate not replacing string variables correctly
+    
 - 1.23.0 -- 2020-07-02
 
     - update LightRealGeneratorService, now can use variables to replace keys, and non-scalar are accepted for values replacement 
