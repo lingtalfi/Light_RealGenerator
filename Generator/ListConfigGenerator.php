@@ -90,8 +90,8 @@ class ListConfigGenerator extends BaseConfigGenerator
         $globalIgnoreColumns = $this->getKeyValue("ignore_columns.$table", false, []);
         $useActionColumn = $this->getKeyValue("list.use_action_column", false, true);
         $useCheckboxColumn = $this->getKeyValue("list.use_checkbox_column", false, true);
-        $columnActionName = $this->getKeyValue("list.column_action_name", false, 'action');
-        $columnCheckboxName = $this->getKeyValue("list.column_checkbox_name", false, 'checkbox');
+        $columnActionName = $this->getKeyValue("list.column_action_name", false, '_action');
+        $columnCheckboxName = $this->getKeyValue("list.column_checkbox_name", false, '_checkbox');
         $columnActionLabel = $this->getKeyValue("list.column_action_label", false, "Actions");
         $rowsRendererIdentifier = $this->getKeyValue("list.rows_renderer_identifier", false);
         $rowsRendererClass = $this->getKeyValue("list.rows_renderer_class", false);
@@ -445,7 +445,7 @@ class ListConfigGenerator extends BaseConfigGenerator
 
 
             if (true === $useActionColumn) {
-                $dataTypes[$columnActionName] = 'action';
+                $dataTypes[$columnActionName] = '_action';
             }
 
 

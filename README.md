@@ -1,6 +1,6 @@
 Light_RealGenerator
 ===========
-2019-10-24 -> 2020-07-02
+2019-10-24 -> 2020-07-06
 
 
 
@@ -97,6 +97,10 @@ Related
 
 History Log
 =============
+
+- 1.24.0 -- 2020-07-06
+
+    - update ListConfigGenerator to accommodate new _action dynamic column name
 
 - 1.23.2 -- 2020-07-02
 
