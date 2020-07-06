@@ -1,6 +1,6 @@
 The configuration block
 --------------
-2019-10-24
+2019-10-24 -> 2020-07-06
 
 
 A configuration block is an array.
@@ -227,7 +227,7 @@ main:
         # The generic_tags (defined in the list option at the root level) are available.
         ?rows_renderer_types_general:
             avatar_url: $img100
-            checkbox: checkbox
+            _checkbox: checkbox
 
         # Defines rows renderer types to add for a specific table.
         # It has precedence over the rows_renderer_type_general option.

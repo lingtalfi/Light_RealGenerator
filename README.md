@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.24.1 -- 2020-07-06
+
+    - update configuration block example
+    
 - 1.24.0 -- 2020-07-06
 
     - update ListConfigGenerator to accommodate new _action dynamic column name
