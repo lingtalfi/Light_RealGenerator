@@ -53,7 +53,7 @@ Returns string.
 
 Source Code
 ===========
-See the source code for method [BaseConfigGenerator::getSymbolicPath](https://github.com/lingtalfi/Light_RealGenerator/blob/master/Generator/BaseConfigGenerator.php#L104-L112)
+See the source code for method [BaseConfigGenerator::getSymbolicPath](https://github.com/lingtalfi/Light_RealGenerator/blob/master/Generator/BaseConfigGenerator.php#L105-L113)
 
 
 See Also

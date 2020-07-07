@@ -9,6 +9,7 @@ use Ling\Bat\CaseTool;
 use Ling\Light\ServiceContainer\LightServiceContainerInterface;
 use Ling\Light_DatabaseInfo\Service\LightDatabaseInfoService;
 use Ling\Light_RealGenerator\Exception\LightRealGeneratorException;
+use Ling\SqlWizard\Util\MysqlStructureReader;
 
 /**
  * The BaseConfigGenerator class.
@@ -245,5 +246,40 @@ class BaseConfigGenerator
             }
         }
         return false;
+    }
+
+
+    /**
+     * Returns the tableInfo array, either from the createFile, or from the database, depending on the configuration.
+     *
+     * @param string $table
+     * @return array
+     * @throws LightRealGeneratorException
+     * @throws \Exception
+     */
+    protected function getTableInfo(string $table): array
+    {
+        $createFile = $this->getKeyValue('create_file', false, null);
+        if (null !== $createFile) {
+            $createFile = str_replace('{app_dir}', $this->container->getApplicationDir(), $createFile);
+        }
+        $useCreateFile = $this->getKeyValue('use_create_file', false, false);
+        $database = $this->getKeyValue('database_name', false, null);
+        if (true === $useCreateFile) {
+            $reader = new MysqlStructureReader();
+            $readerArray = $reader->readFile($createFile);
+            if (array_key_exists($table, $readerArray)) {
+                $tableInfo = MysqlStructureReader::readerArrayToTableInfo($readerArray[$table], $this->container->get("database"));
+            } else {
+                throw new LightRealGeneratorException("Table \"$table\" not defined in create file: $createFile.");
+            }
+        } else {
+            /**
+             * @var $dbInfo LightDatabaseInfoService
+             */
+            $dbInfo = $this->container->get('database_info');
+            $tableInfo = $dbInfo->getTableInfo($table, $database);
+        }
+        return $tableInfo;
     }
 }

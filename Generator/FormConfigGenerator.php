@@ -104,11 +104,7 @@ class FormConfigGenerator extends BaseConfigGenerator
 
 
         $ignoreColumns = array_unique(array_merge($globalIgnoreColumns, $ignoreColumns));
-        /**
-         * @var $dbInfo LightDatabaseInfoService
-         */
-        $dbInfo = $this->container->get('database_info');
-        $tableInfo = $dbInfo->getTableInfo($table, $database);
+        $tableInfo = $this->getTableInfo($table);
         $foreignKeysInfo = $tableInfo['foreignKeysInfo'];
         $autoIncrementedKey = $tableInfo['autoIncrementedKey'];
         if (false !== $autoIncrementedKey) {
@@ -354,7 +350,10 @@ class FormConfigGenerator extends BaseConfigGenerator
 
             $arr = [];
             foreach ($tables as $table) {
-                $tableInfo = $dbInfo->getTableInfo($table, $database);
+                $tableInfo = $this->getTableInfo($table);
+
+
+
                 $columns = $tableInfo['columns'];
                 $foreignKeysInfo = $tableInfo['foreignKeysInfo'];
                 foreach ($columns as $col) {

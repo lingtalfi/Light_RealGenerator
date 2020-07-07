@@ -1,6 +1,6 @@
 Light_RealGenerator
 ===========
-2019-10-24 -> 2020-07-06
+2019-10-24 -> 2020-07-07
 
 
 
@@ -97,6 +97,10 @@ Related
 
 History Log
 =============
+
+- 1.25.0 -- 2020-07-07
+
+    - add create_file and use_create_file directives
 
 - 1.24.1 -- 2020-07-06
 

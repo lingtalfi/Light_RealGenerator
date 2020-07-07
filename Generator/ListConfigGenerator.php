@@ -12,6 +12,7 @@ use Ling\Light_DatabaseInfo\Service\LightDatabaseInfoService;
 use Ling\Light_RealGenerator\Exception\LightRealGeneratorException;
 use Ling\Light_RealGenerator\Util\RepresentativeColumnFinderUtil;
 use Ling\SqlWizard\Tool\SqlWizardGeneralTool;
+use Ling\SqlWizard\Util\MysqlStructureReader;
 
 /**
  * The ListConfigGenerator class.
@@ -46,7 +47,7 @@ class ListConfigGenerator extends BaseConfigGenerator
         $targetDir = $this->getKeyValue("list.target_dir");
         $targetDir = str_replace('{app_dir}', $appDir, $targetDir);
 
-        $this->debugLog("Generating " . count($tables) . " list config(s) in the following directory: ". $this->getSymbolicPath($targetDir) .".");
+        $this->debugLog("Generating " . count($tables) . " list config(s) in the following directory: " . $this->getSymbolicPath($targetDir) . ".");
 
         foreach ($tables as $table) {
             $content = $this->getFileContent($table);
@@ -82,6 +83,8 @@ class ListConfigGenerator extends BaseConfigGenerator
         $main = [];
         $main['table'] = $table;
         $database = $this->getKeyValue('database_name', false, null);
+
+
         $pluginName = $this->getKeyValue('plugin_name');
         $listActionGroupsPluginName = $this->getKeyValue('list.list_action_groups_plugin_name', false, $pluginName);
         $listGeneralActionsPluginName = $this->getKeyValue('list.list_general_actions_plugin_name', false, $pluginName);
@@ -114,11 +117,10 @@ class ListConfigGenerator extends BaseConfigGenerator
 
 
         $ignoreColumns = array_unique(array_merge($globalIgnoreColumns, $ignoreColumns));
-        /**
-         * @var $dbInfo LightDatabaseInfoService
-         */
-        $dbInfo = $this->container->get('database_info');
-        $tableInfo = $dbInfo->getTableInfo($table, $database);
+
+
+        $tableInfo = $this->getTableInfo($table);
+
 
         $tableRic = $tableInfo['ric'];
         $main['ric'] = $tableRic;
