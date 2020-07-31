@@ -1,6 +1,6 @@
 The configuration block
 --------------
-2019-10-24 -> 2020-07-07
+2019-10-24 -> 2020-07-31
 
 
 A configuration block is an array.
@@ -346,7 +346,8 @@ main:
                 mimeType: null
                 postParams:
                     id: {plugin_prefix}-{table}-{field}
-                    csrf_token: REALGEN(crsf, realGen-ajaxform-{table}-{field})
+                    # csrf_token: REALGEN(crsf, realGen-ajaxform-{table}-{field})
+                    csrf_token: true
                 validators:
                     validUserDataUrl: []
 

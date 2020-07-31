@@ -344,10 +344,7 @@ class ListConfigGenerator extends BaseConfigGenerator
             // MISCELLANEOUS
             //--------------------------------------------
             $main['plugin'] = $pluginName;
-            $main['csrf_token'] = [
-                "name" => 'realist-request',
-                "value" => 'REALIST(Light_Realist, csrf_token, realist-request)',
-            ];
+            $main['csrf_token'] = true;
             $main['use_micro_permission'] = $useMicroPermission;
             $main['use_row_restriction'] = $useRowRestriction;
             $main['query_error_show_debug_info'] = $queryErrorShowDebugInfo;

@@ -1,6 +1,6 @@
 Light_RealGenerator
 ===========
-2019-10-24 -> 2020-07-07
+2019-10-24 -> 2020-07-31
 
 
 
@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.25.1 -- 2020-07-31
+
+    - fix Light_RealGenerator generating old way of checking csrf_token
+    
 - 1.25.0 -- 2020-07-07
 
     - add create_file and use_create_file directives
