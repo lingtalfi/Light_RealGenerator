@@ -1,6 +1,6 @@
 The configuration block
 --------------
-2019-10-24 -> 2020-07-31
+2019-10-24 -> 2020-08-03
 
 
 A configuration block is an array.
@@ -71,6 +71,13 @@ main:
     ?ignore_columns:
         lud_user:
             - password
+    
+    # Bool=true. Whether to generate lists
+    use_list: true
+
+    # Bool=true. Whether to generate forms
+    use_form: true
+
 
     # This section defines the behaviour of the list configuration file generator
     # The term generic tags, used in some of the definitions below, refers to the following array:

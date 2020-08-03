@@ -1,6 +1,6 @@
 Light_RealGenerator
 ===========
-2019-10-24 -> 2020-07-31
+2019-10-24 -> 2020-08-03
 
 
 
@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.26.0 -- 2020-08-03
+
+    - update config file, add use_list and use_form properties
+    
 - 1.25.1 -- 2020-07-31
 
     - fix Light_RealGenerator generating old way of checking csrf_token

@@ -122,7 +122,6 @@ class LightRealGeneratorService
             });
 
 
-
             /**
              * replacing values
              */
@@ -131,31 +130,39 @@ class LightRealGeneratorService
             });
 
 
-
-
-
             $debugCallable = [$this, "debugLog"];
 
 
-            if (array_key_exists("list", $genConf)) {
-                $this->debugLog("List configuration found.");
-                $listGenerator = new ListConfigGenerator();
-                $listGenerator->setDebugCallable($debugCallable);
-                $listGenerator->setContainer($this->container);
-                $listGenerator->generate($genConf);
+            $useList = $genConf['use_list'] ?? true;
+
+            if (false === $useList) {
+                $this->debugLog("use_list=false, skipping list configuration.");
             } else {
-                $this->debugLog("No list configuration found.");
+                if (array_key_exists("list", $genConf)) {
+                    $this->debugLog("List configuration found.");
+                    $listGenerator = new ListConfigGenerator();
+                    $listGenerator->setDebugCallable($debugCallable);
+                    $listGenerator->setContainer($this->container);
+                    $listGenerator->generate($genConf);
+                } else {
+                    $this->debugLog("No list configuration found.");
+                }
             }
 
 
-            if (array_key_exists("form", $genConf)) {
-                $this->debugLog("Form configuration found.");
-                $formGenerator = new FormConfigGenerator();
-                $formGenerator->setDebugCallable($debugCallable);
-                $formGenerator->setContainer($this->container);
-                $formGenerator->generate($genConf);
+            $useForm = $genConf['use_form'] ?? true;
+            if (false === $useForm) {
+                $this->debugLog("use_form=false, skipping form configuration.");
             } else {
-                $this->debugLog("No form configuration found.");
+                if (array_key_exists("form", $genConf)) {
+                    $this->debugLog("Form configuration found.");
+                    $formGenerator = new FormConfigGenerator();
+                    $formGenerator->setDebugCallable($debugCallable);
+                    $formGenerator->setContainer($this->container);
+                    $formGenerator->generate($genConf);
+                } else {
+                    $this->debugLog("No form configuration found.");
+                }
             }
 
 
