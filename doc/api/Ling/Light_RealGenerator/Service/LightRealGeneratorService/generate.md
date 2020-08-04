@@ -24,6 +24,9 @@ public [LightRealGeneratorService::generate](https://github.com/lingtalfi/Light_
 Generates the configuration files for both the [realist](https://github.com/lingtalfi/Light_Realist) and [realform](https://github.com/lingtalfi/Light_Realform) plugins,
 according to the [configuration block](https://github.com/lingtalfi/Light_RealGenerator/blob/master/doc/pages/realgen-configuration-block.md) identified by the given file and identifier.
 
+Returns the configuration array used.
+
+
 The default identifier defaults to "main".
 
 
@@ -61,7 +64,7 @@ Exceptions thrown
 
 Source Code
 ===========
-See the source code for method [LightRealGeneratorService::generate](https://github.com/lingtalfi/Light_RealGenerator/blob/master/Service/LightRealGeneratorService.php#L70-L175)
+See the source code for method [LightRealGeneratorService::generate](https://github.com/lingtalfi/Light_RealGenerator/blob/master/Service/LightRealGeneratorService.php#L73-L180)
 
 
 See Also

@@ -53,7 +53,7 @@ Returns string.
 
 Source Code
 ===========
-See the source code for method [LightRealGeneratorService::getSymbolicPath](https://github.com/lingtalfi/Light_RealGenerator/blob/master/Service/LightRealGeneratorService.php#L238-L246)
+See the source code for method [LightRealGeneratorService::getSymbolicPath](https://github.com/lingtalfi/Light_RealGenerator/blob/master/Service/LightRealGeneratorService.php#L243-L251)
 
 
 See Also

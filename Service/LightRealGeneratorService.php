@@ -60,6 +60,9 @@ class LightRealGeneratorService
      * Generates the configuration files for both the @page(realist) and @page(realform) plugins,
      * according to the @page(configuration block) identified by the given file and identifier.
      *
+     * Returns the configuration array used.
+     *
+     *
      * The default identifier defaults to "main".
      *
      *
@@ -67,8 +70,9 @@ class LightRealGeneratorService
      * @param string|null $identifier
      * @throws \Exception
      */
-    public function generate(string $file, string $identifier = null)
+    public function generate(string $file, string $identifier = null): array
     {
+        $genConf = [];
         $conf = BabyYamlUtil::readFile($file);
         if (null === $identifier) {
             $identifier = 'main';
@@ -172,6 +176,7 @@ class LightRealGeneratorService
         } else {
             $this->error("Identifier not found: $identifier, in $file.");
         }
+        return $genConf;
     }
 
 

@@ -1,6 +1,6 @@
 Light_RealGenerator
 ===========
-2019-10-24 -> 2020-08-03
+2019-10-24 -> 2020-08-04
 
 
 
@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.27.0 -- 2020-08-04
+
+    - update LightRealGeneratorService->generate, now returns the configuration array used
+    
 - 1.26.0 -- 2020-08-03
 
     - update config file, add use_list and use_form properties
