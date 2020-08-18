@@ -49,7 +49,7 @@ Returns void.
 
 Source Code
 ===========
-See the source code for method [LightRealGeneratorService::debugLog](https://github.com/lingtalfi/Light_RealGenerator/blob/master/Service/LightRealGeneratorService.php#L212-L224)
+See the source code for method [LightRealGeneratorService::debugLog](https://github.com/lingtalfi/Light_RealGenerator/blob/master/Service/LightRealGeneratorService.php#L241-L253)
 
 
 See Also

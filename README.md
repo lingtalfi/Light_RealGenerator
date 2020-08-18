@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.29.0 -- 2020-08-18
+
+    - add LightRealGeneratorService->generateByConf method
+    
 - 1.28.0 -- 2020-08-18
 
     - update config file, add target_basename directive

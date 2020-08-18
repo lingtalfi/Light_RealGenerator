@@ -57,6 +57,26 @@ class LightRealGeneratorService
 
 
     /**
+     * Same as generateByConf method, but takes the file path instead of the array.
+     * Also, it doesn't have an options argument.
+     *
+     *
+     *
+     * @param string $file
+     * @param string|null $identifier
+     * @return array
+     * @throws \Exception
+     */
+    public function generate(string $file, string $identifier = null): array
+    {
+        $conf = BabyYamlUtil::readFile($file);
+        return $this->generateByConf($conf, $identifier, [
+            'file' => $file,
+        ]);
+    }
+
+
+    /**
      * Generates the configuration files for both the @page(realist) and @page(realform) plugins,
      * according to the @page(configuration block) identified by the given file and identifier.
      *
@@ -65,22 +85,31 @@ class LightRealGeneratorService
      *
      * The default identifier defaults to "main".
      *
+     * Available options are:
+     * - file: the path to the file from which the conf originated (if it does originate from a file).
+     *      This will only be used in debug messages, to provide more info to the debugging developer.
      *
-     * @param string $file
+     *
+     *
+     * @param array $conf
      * @param string|null $identifier
+     * @param array $options
      * @throws \Exception
      */
-    public function generate(string $file, string $identifier = null): array
+    public function generateByConf(array $conf, string $identifier = null, array $options = []): array
     {
         $genConf = [];
-        $conf = BabyYamlUtil::readFile($file);
         if (null === $identifier) {
             $identifier = 'main';
         }
 
+        $sDebug = '';
+        if (array_key_exists("file", $options)) {
+            $sDebug .= ", file=" . $this->getSymbolicPath(realpath($options['file']));
+        }
 
         $this->debugLog("--clean--"); // reinitializing the log file
-        $this->debugLog("Launching real_generator with identifier=\"$identifier\" and file=\"" . $this->getSymbolicPath(realpath($file)) . "\".");
+        $this->debugLog("Launching real_generator with identifier=\"$identifier\"$sDebug.");
 
 
         if (array_key_exists($identifier, $conf)) {
@@ -174,7 +203,7 @@ class LightRealGeneratorService
 
 
         } else {
-            $this->error("Identifier not found: $identifier, in $file.");
+            $this->error("Identifier not found: $identifier" . $sDebug . ".");
         }
         return $genConf;
     }
