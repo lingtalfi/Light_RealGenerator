@@ -1,6 +1,6 @@
 The configuration block
 --------------
-2019-10-24 -> 2020-08-03
+2019-10-24 -> 2020-08-18
 
 
 A configuration block is an array.
@@ -102,6 +102,16 @@ main:
         # It's an absolute path.
         # The tag {app_dir} can be used, and will be replaced with the actual "application root directory".
         target_dir: {app_dir}/config/data/Light_Kit_Admin/Light_Realist/generated
+
+
+        # the base name of the files to generate
+        # the default value is {table}.byml
+        # the available tags are:
+        # - {table}: the name of the table used to generate this list nugget
+        target_basename: {table}.byml
+
+
+
 
         # The title of the list, defaults to:
         # - {label} list

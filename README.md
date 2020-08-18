@@ -1,6 +1,6 @@
 Light_RealGenerator
 ===========
-2019-10-24 -> 2020-08-04
+2019-10-24 -> 2020-08-18
 
 
 
@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.28.0 -- 2020-08-18
+
+    - update config file, add target_basename directive
+    
 - 1.27.0 -- 2020-08-04
 
     - update LightRealGeneratorService->generate, now returns the configuration array used

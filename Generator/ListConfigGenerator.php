@@ -8,11 +8,9 @@ use Ling\BabyYaml\BabyYamlUtil;
 use Ling\Bat\ArrayTool;
 use Ling\Bat\CaseTool;
 use Ling\Bat\FileSystemTool;
-use Ling\Light_DatabaseInfo\Service\LightDatabaseInfoService;
 use Ling\Light_RealGenerator\Exception\LightRealGeneratorException;
 use Ling\Light_RealGenerator\Util\RepresentativeColumnFinderUtil;
 use Ling\SqlWizard\Tool\SqlWizardGeneralTool;
-use Ling\SqlWizard\Util\MysqlStructureReader;
 
 /**
  * The ListConfigGenerator class.
@@ -46,12 +44,13 @@ class ListConfigGenerator extends BaseConfigGenerator
         $appDir = $this->container->getApplicationDir();
         $targetDir = $this->getKeyValue("list.target_dir");
         $targetDir = str_replace('{app_dir}', $appDir, $targetDir);
+        $targetBaseName = $this->getKeyValue("list.target_basename", false, "{table}.byml");
 
         $this->debugLog("Generating " . count($tables) . " list config(s) in the following directory: " . $this->getSymbolicPath($targetDir) . ".");
 
         foreach ($tables as $table) {
             $content = $this->getFileContent($table);
-            $fileName = $table . ".byml";
+            $fileName = str_replace('{table}', $table, $targetBaseName);
             $path = $targetDir . '/' . $fileName;
             FileSystemTool::mkfile($path, $content);
         }
