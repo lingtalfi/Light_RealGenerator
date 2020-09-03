@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.30.2 -- 2020-09-03
+
+    - update "The configuration block" document, reorganized, fix typo
+    
 - 1.30.1 -- 2020-09-03
 
     - fix "The configuration block" document, forgot to remove the identifier part

@@ -115,9 +115,6 @@ list:
     ?query_error_show_debug_info: false
 
 
-    # Whether to use the action column (added to every row). Defaults to true.
-    ?use_action_column: true
-
     # Whether to use the cross columns on foreign keys
     # See more about cross columns in https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/crossed-column.md
     ?use_cross_columns: true
@@ -165,6 +162,9 @@ list:
         lud: Light_Kit_Admin
 
 
+    # Whether to use the action column (added to every row). Defaults to true.
+    ?use_action_column: true
+
     # The name of the action column (only if use_action_column=true). Defaults to "action".
     # Tip: the default value is set by the LightRealistService->executeRequestById method.
     ?column_action_name: action
@@ -180,7 +180,7 @@ list:
     # Tip: the default value is set by the LightRealistService->executeRequestById method.
     ?column_checkbox_name: checkbox
 
-    # The label for the checkbox column (only if use_checkbox_column=true). Defaults to "#".
+    # The label for the checkbox column (only if use_checkbox_column=true). Defaults to "Checkbox".
     ?column_checkbox_label: "Checkbox"
 
     # The name of the class to use as the action handler.
