@@ -16,7 +16,7 @@ Description
 ================
 
 
-public [LightRealGeneratorService::generateByConf](https://github.com/lingtalfi/Light_RealGenerator/blob/master/doc/api/Ling/Light_RealGenerator/Service/LightRealGeneratorService/generateByConf.md)(array $conf, ?string $identifier = null, ?array $options = []) : void
+public [LightRealGeneratorService::generateByConf](https://github.com/lingtalfi/Light_RealGenerator/blob/master/doc/api/Ling/Light_RealGenerator/Service/LightRealGeneratorService/generateByConf.md)(array $conf, ?array $options = []) : void
 
 
 
@@ -44,10 +44,6 @@ Parameters
 
     
 
-- identifier
-
-    
-
 - options
 
     
@@ -72,7 +68,7 @@ Exceptions thrown
 
 Source Code
 ===========
-See the source code for method [LightRealGeneratorService::generateByConf](https://github.com/lingtalfi/Light_RealGenerator/blob/master/Service/LightRealGeneratorService.php#L99-L209)
+See the source code for method [LightRealGeneratorService::generateByConf](https://github.com/lingtalfi/Light_RealGenerator/blob/master/Service/LightRealGeneratorService.php#L97-L198)
 
 
 See Also

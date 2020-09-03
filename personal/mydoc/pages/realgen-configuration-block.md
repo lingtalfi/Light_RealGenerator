@@ -1,6 +1,6 @@
 The configuration block
 --------------
-2019-10-24 -> 2020-08-18
+2019-10-24 -> 2020-09-03
 
 
 A configuration block is an array.
@@ -89,14 +89,6 @@ main:
     list:
 
 
-        # The name of the plugin who handles the list actions. By default, it's the plugin name defined with the
-        # plugin_name option (at the root level of this file).
-        ?list_action_groups_plugin_name: Light_Kit_Admin
-
-        # The name of the plugin who handles the list general actions. By default, it's the plugin name defined with the
-        # plugin_name option (at the root level of this file).
-        ?list_general_actions_plugin_name: Light_Kit_Admin
-
 
         # The target_dir is the path of the dir where to generate the files
         # It's an absolute path.
@@ -118,20 +110,6 @@ main:
         # The generic tags (see the list description comment) can be used to replace some part of the title by
         # dynamic values.
         ?title: {label} list
-
-
-
-        # Bool=true, whether to add the use_micro_permission setting in the request declaration.
-        # See the miscellaneous section of the realist conception notes for more details:
-        # https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/realist-conception-notes.md#miscellaneous
-        ?use_micro_permission: true
-
-
-
-        # Whether to use the row restriction system https://github.com/lingtalfi/Light_UserRowRestriction/blob/master/doc/pages/conception-notes.md.
-        # The default value is false.
-        ?use_row_restriction: false
-
 
         # When executing the stmt request and there is an error: whether to show the query/markers information along with the
         # error message (true), or just display the error message (false, by default)
@@ -204,7 +182,16 @@ main:
         ?column_checkbox_name: checkbox
 
         # The label for the checkbox column (only if use_checkbox_column=true). Defaults to "#".
-        ?column_checkbox_label: "#"
+        ?column_checkbox_label: "Checkbox"
+
+        # The name of the class to use as the action handler.
+        # The default value is: Ling\Light_Kit_Admin\Realist\ListActionHandler\LightKitAdminListActionHandler 
+        action_handler_class: "Ling\Light_Kit_Admin\Realist\ListActionHandler\LightKitAdminListActionHandler"
+
+        # The name of the class to use as the list renderer.
+        # The default value is: Ling\Light_Kit_Admin\Realist\Rendering\LightKitAdminRealistListRenderer 
+        list_renderer_class: "Ling\Light_Kit_Admin\Realist\Rendering\LightKitAdminRealistListRenderer"
+
 
         # This array let you ignore/skip columns that you want to exclude from the generated list config file.
         # It's an array of table => columnNames, with columnNames being an array of column names.
@@ -228,12 +215,13 @@ main:
             lud_user:
                 pseudo: The pseudo
 
-        # Overrides the rows_renderer.identifier default value, which defaults to the plugin name.
-        ?rows_renderer_identifier: MyPlugin
+        # Overrides the rows_renderer.identifier default value, which is null.
+        ?rows_renderer_identifier: null
 
         # Defines the rows_renderer.class value. If you define this key, it will have precedence
-        # over the rows_renderer_identifier option.
-        ?rows_renderer_class: My\Class
+        # over the rows_renderer_identifier option. The default value is Ling\Light_Kit_Admin\Realist\Rendering\LightKitAdminRealistListItemRenderer,
+        # because that's the one I use the most
+        ?rows_renderer_class: Ling\Light_Kit_Admin\Realist\Rendering\LightKitAdminRealistListItemRenderer
 
 
 
@@ -414,10 +402,8 @@ main:
             # The available values are:
             # - database
             type: database
-            # More options, depending on the success handler type
-            ?options:
-                # option for database type only, whether to use the row restriction system
-                use_row_restriction: true
+            # More options, depending on the success handler type. This is just an empty placeholder for now (i.e. no concrete options available).
+            ?options: []
 
         # Bool. Optional. Defaults to true. 
         # Whether to use the multiplier mode on has tables. 

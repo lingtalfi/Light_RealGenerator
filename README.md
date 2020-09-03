@@ -1,6 +1,6 @@
 Light_RealGenerator
 ===========
-2019-10-24 -> 2020-08-18
+2019-10-24 -> 2020-09-03
 
 
 
@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.30.0 -- 2020-09-03
+
+    - adapt for realist2 api
+    
 - 1.29.0 -- 2020-08-18
 
     - add LightRealGeneratorService->generateByConf method

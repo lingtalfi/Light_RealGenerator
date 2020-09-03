@@ -16,7 +16,7 @@ Description
 ================
 
 
-public [LightRealGeneratorService::generate](https://github.com/lingtalfi/Light_RealGenerator/blob/master/doc/api/Ling/Light_RealGenerator/Service/LightRealGeneratorService/generate.md)(string $file, ?string $identifier = null) : array
+public [LightRealGeneratorService::generate](https://github.com/lingtalfi/Light_RealGenerator/blob/master/doc/api/Ling/Light_RealGenerator/Service/LightRealGeneratorService/generate.md)(string $file) : array
 
 
 
@@ -32,10 +32,6 @@ Parameters
 
 
 - file
-
-    
-
-- identifier
 
     
 
@@ -59,7 +55,7 @@ Exceptions thrown
 
 Source Code
 ===========
-See the source code for method [LightRealGeneratorService::generate](https://github.com/lingtalfi/Light_RealGenerator/blob/master/Service/LightRealGeneratorService.php#L70-L76)
+See the source code for method [LightRealGeneratorService::generate](https://github.com/lingtalfi/Light_RealGenerator/blob/master/Service/LightRealGeneratorService.php#L69-L75)
 
 
 See Also
