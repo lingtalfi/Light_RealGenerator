@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.30.1 -- 2020-09-03
+
+    - fix "The configuration block" document, forgot to remove the identifier part
+    
 - 1.30.0 -- 2020-09-03
 
     - adapt for realist2 api
