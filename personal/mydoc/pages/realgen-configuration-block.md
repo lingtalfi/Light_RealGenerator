@@ -92,7 +92,7 @@ list:
     # The target_dir is the path of the dir where to generate the files
     # It's an absolute path.
     # The tag {app_dir} can be used, and will be replaced with the actual "application root directory".
-    target_dir: {app_dir}/config/data/Light_Kit_Admin/Light_Realist/generated
+    target_dir: {app_dir}/config/data/Light_Kit_Admin/Light_Realist/list/generated
 
 
     # the base name of the files to generate
@@ -301,7 +301,7 @@ form:
     # The target_dir is the path of the dir where to generate the files
     # It's an absolute path.
     # The tag {app_dir} can be used, and will be replaced with the actual "application root directory".
-    target_dir: {app_dir}/config/data/Light_Kit_Admin/Light_Realform/generated
+    target_dir: {app_dir}/config/data/Light_Kit_Admin/Light_Realform//form/generated
 
 
     # This array let you ignore/skip columns that you want to exclude from the generated form config file.

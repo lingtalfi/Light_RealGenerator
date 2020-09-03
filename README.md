@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.30.3 -- 2020-09-03
+
+    - update "The configuration block" document, list.target_dir and form.target_dir have new defaults
+
 - 1.30.2 -- 2020-09-03
 
     - update "The configuration block" document, reorganized, fix typo
