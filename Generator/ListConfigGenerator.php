@@ -79,8 +79,13 @@ class ListConfigGenerator extends BaseConfigGenerator
         //--------------------------------------------
 
         $main = [];
+
+        $main['_vars'] = [
+            "table" => $table,
+        ];
+
         $duelist = [];
-        $duelist['table'] = $table;
+        $duelist['table'] = '{$table}';
 
 
         $pluginName = $this->getKeyValue('plugin_name');
@@ -384,7 +389,7 @@ class ListConfigGenerator extends BaseConfigGenerator
             ];
             $listActionGroups = [
                 [
-                    'action_id' => "realist-print",
+                    'action_id' => "realist-print_rows",
                     'text' => "Print",
                     'icon' => "fas fa-print",
                 ],
@@ -488,6 +493,7 @@ class ListConfigGenerator extends BaseConfigGenerator
             $rowsRendererTypes = array_merge($rowsRendererTypes, $fkCrossColumnRenderTypes);
 
 
+
             if ($rowsRendererTypes) {
                 $rowsRenderer['types'] = $rowsRendererTypes;
             }
@@ -505,7 +511,7 @@ class ListConfigGenerator extends BaseConfigGenerator
             $main['rendering'] = [
                 "title" => $listTitle,
                 "list_general_actions" => $listGeneralActions,
-                "list_action_groups" => $listActionGroups,
+                "list_item_group_actions" => $listActionGroups,
                 "list_renderer" => [
                     'class' => $listRendererClass,
                 ],

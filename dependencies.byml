@@ -4,7 +4,6 @@ dependencies:
         - Light
         - Light_DatabaseInfo
         - SqlWizard
-        - ArrayToString
         - ArrayVariableResolver
         - BabyYaml
         - Light_Logger

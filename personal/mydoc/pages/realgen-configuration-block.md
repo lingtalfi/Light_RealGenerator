@@ -285,17 +285,13 @@ form:
     # This property is provided by Light_Kit_Admin_Generator (i.e. not in Light_RealGenerator).
     use_link_to_list: true
 
-    # An array, empty by default, which can contain the row restriction to apply. The possible options are:
-    # - read
-    # - update
-    #
-    # Note: regular forms usually delegate the process of the form info to the RealformSuccessHandlerInterface,
-    # which uses its own row restriction (see the on_success_handler property in this section for more details).
-    # The "update" option here applies for potential external tools, such as an external multiple rows form editor for instance.
-    #
-    ?row_restriction: []
-#            - read
-#            - update
+    # The security array. See the [baked in security system of Light_Nugget](https://github.com/lingtalfi/Light_Nugget/blob/master/doc/pages/conception-notes.md#a-baked-in-security-system-for-nugget-users) for more details.
+    security:
+        any:
+            permission: Light_Kit_Admin.admin
+
+
+
 
 
     # The target_dir is the path of the dir where to generate the files
@@ -379,14 +375,12 @@ form:
             # The default value is true.
             # When true, if a field is a foreign key we will generate the configuration for a table list field (https://github.com/lingtalfi/Light_ChloroformExtension/blob/master/doc/pages/conception-notes.md#tablelistfield).
             ?use_table_list: true
-            # Beside from generating those configuration items, we can also generate the table list fields specific configuration items (https://github.com/lingtalfi/Light_ChloroformExtension/blob/master/doc/pages/conception-notes.md#configuration-item).
-            # This is done by setting the table_list_config_file property below.
-            # If null (by default), we will not generate those table list configuration items.
-            # If set to a path, the table list configuration items will be generated/written inside this file.
-            # Each entry's key will have the following format:
-            #       - {referencedTable}.{referencedField}
-            # For the values, please refer to the actual implementation.
-            ?table_list_config_file: null
+
+            # Array, the security directive to use with the table list(s).
+            # See the [Light_Nugget baked in security system](https://github.com/lingtalfi/Light_Nugget/blob/master/doc/pages/conception-notes.md#a-baked-in-security-system-for-nugget-users) for more details.
+            table_list_security:
+                any:
+                    permission: Light_Kit_Admin.admin
 
 
     # An array of table => notRequiredFields, with notRequiredFields being an array of the fields for which you don't

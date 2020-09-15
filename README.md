@@ -1,6 +1,6 @@
 Light_RealGenerator
 ===========
-2019-10-24 -> 2020-09-03
+2019-10-24 -> 2020-09-15
 
 
 
@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.31.0 -- 2020-09-15
+
+    - update api to adapt new Realist and Realform apis
+    
 - 1.30.3 -- 2020-09-03
 
     - update "The configuration block" document, list.target_dir and form.target_dir have new defaults

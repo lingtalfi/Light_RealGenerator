@@ -111,29 +111,33 @@ class LightRealGeneratorService
         // replacing variables now
         $variables = $genConf['variables'] ?? [];
 
+
         $replaceFn = function ($value, $isValue = false) use ($variables) {
 
-            if (preg_match_all('!\{\$([a-zA-Z0-9_]*)\}!', $value, $matches)) {
 
-                $varNames = $matches[1];
-                $ret = $value;
+            if (false === is_array($value)) {
+                if (preg_match_all('!\{\$([a-zA-Z0-9_]*)\}!', $value, $matches)) {
+
+                    $varNames = $matches[1];
+                    $ret = $value;
 
 
-                foreach ($varNames as $varName) {
-                    if (array_key_exists($varName, $variables)) {
-                        $newValue = $variables[$varName];
-                        if (true === $isValue) {
-                            if (true === is_scalar($newValue)) {
-                                $ret = str_replace('{$' . $varName . '}', $newValue, $ret);
+                    foreach ($varNames as $varName) {
+                        if (array_key_exists($varName, $variables)) {
+                            $newValue = $variables[$varName];
+                            if (true === $isValue) {
+                                if (true === is_scalar($newValue)) {
+                                    $ret = str_replace('{$' . $varName . '}', $newValue, $ret);
+                                } else {
+                                    $ret = $newValue;
+                                }
                             } else {
-                                $ret = $newValue;
+                                $ret = str_replace('{$' . $varName . '}', $newValue, $ret);
                             }
-                        } else {
-                            $ret = str_replace('{$' . $varName . '}', $newValue, $ret);
                         }
                     }
+                    return $ret;
                 }
-                return $ret;
             }
             return $value;
         };
