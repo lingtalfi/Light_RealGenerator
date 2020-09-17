@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.31.2 -- 2020-09-17
+
+    - fix FormConfigGenerator trying to merge arrays with null value
+    
 - 1.31.1 -- 2020-09-17
 
     - update FormConfigGenerator remove unused code

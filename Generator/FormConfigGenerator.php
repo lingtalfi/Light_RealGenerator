@@ -373,7 +373,7 @@ class FormConfigGenerator extends BaseConfigGenerator
         $specialFields = $this->getKeyValue("form.special_fields", false, []);
         $chloroformExtensions = $specialFields['chloroform_extensions'] ?? [];
         $useTableList = $chloroformExtensions['use_table_list'] ?? true;
-        $tableListSecurity = $chloroformExtensions['table_list_security'] ?? true;
+        $tableListSecurity = $chloroformExtensions['table_list_security'] ?? [];
 
 
 //        $database = $this->getKeyValue('database_name', false, null);
