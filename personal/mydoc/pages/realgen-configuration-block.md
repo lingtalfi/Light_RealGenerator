@@ -307,16 +307,6 @@ form:
         lud_user:
             - password
 
-    # Overrides the default form handler class (which defaults to a plain Chloroform instance) for all tables,
-    # unless a more specific override has been defined with the form_handler_class_specific option (in
-    # which case the more specific override is used).
-    # It's a string representing the class to use.
-    ?form_handler_class_general: My\Class
-    # Overrides the default form handler class (which defaults to a plain Chloroform instance) for a given table.
-    # It's an array of table => class.
-    ?form_handler_class_specific:
-        lud_user: My\Specific\Class
-
     # Overrides completely or partially the fields items.
     # It's an array of table => fieldItems, with fieldItems being an array of fieldName => fieldItem.
     # See the realform documentation for more info about the field item structure:

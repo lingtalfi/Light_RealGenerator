@@ -1,6 +1,6 @@
 Light_RealGenerator
 ===========
-2019-10-24 -> 2020-09-15
+2019-10-24 -> 2020-09-17
 
 
 
@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.31.1 -- 2020-09-17
+
+    - update FormConfigGenerator remove unused code
+    
 - 1.31.0 -- 2020-09-15
 
     - update api to adapt new Realist and Realform apis

@@ -86,9 +86,6 @@ class FormConfigGenerator extends BaseConfigGenerator
 
 
         $pluginName = $this->getKeyValue('plugin_name');
-        $database = $this->getKeyValue('database_name', false, null);
-        $formHandlerClassGeneral = $this->getKeyValue("form.form_handler_class_general", false, null);
-        $formHandlerClassSpecific = $this->getKeyValue("form.form_handler_class_specific.$table", false, null);
         $globalIgnoreColumns = $this->getKeyValue("ignore_columns.$table", false, []);
         $ignoreColumns = $this->getKeyValue("form.ignore_columns.$table", false, []);
         $customFields = $this->getKeyValue("form.fields.$table", false, []);
@@ -99,8 +96,6 @@ class FormConfigGenerator extends BaseConfigGenerator
         $formTitle = $this->getKeyValue("form.title", false, "{Label} form");
         $specialFields = $this->getKeyValue("form.special_fields", false, []);
         $onSuccessHandlerType = $onSuccessHandler['type'] ?? "database";
-        $onSuccessHandlerOptions = $onSuccessHandler['options'] ?? [];
-        $useRowRestriction = $onSuccessHandlerOptions['use_row_restriction'] ?? true;
         $useMultiplierOnHas = $this->getKeyValue("form.use_multiplier_on_has", false, true);
         $security = $this->getKeyValue("form.security", false, []);
 
@@ -108,7 +103,6 @@ class FormConfigGenerator extends BaseConfigGenerator
         // special types
         $chloroformExtensions = $specialFields['chloroform_extensions'] ?? [];
         $useTableList = $chloroformExtensions['use_table_list'] ?? true;
-        $tableListConfigFile = $chloroformExtensions['table_list_config_file'] ?? null;
 
         $isHasTable = $this->isHasTable($table);
         $genericTags = $this->getGenericTagsByTable($table);
