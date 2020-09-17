@@ -124,6 +124,7 @@ class ListConfigGenerator extends BaseConfigGenerator
 
 
         $ignoreColumns = array_unique(array_merge($globalIgnoreColumns, $ignoreColumns));
+        $colToCross = [];
 
 
         $tableInfo = $this->getTableInfo($table);
@@ -145,7 +146,6 @@ class ListConfigGenerator extends BaseConfigGenerator
         $baseJoins = [];
         $fkToConcat = [];
         $crossColumnLabels = [];
-        $hiddenColumns = [];
         $fkCrossColumnRenderTypes = [];
         $crossColumnAlias2OpenAdminDataTypes = [];
 
@@ -215,9 +215,9 @@ class ListConfigGenerator extends BaseConfigGenerator
 
 
                     //--------------------------------------------
-                    // hidden columns
+                    // replace regular column with their cross equivalent
                     //--------------------------------------------
-                    $hiddenColumns[] = $fk;
+                    $colToCross[$fk] = $crossColumnAlias;
 
 
                     //--------------------------------------------
@@ -457,7 +457,14 @@ class ListConfigGenerator extends BaseConfigGenerator
             }
 
 
-            $propertiesToDisplay = array_diff(array_values($columns), $hiddenColumns);
+            $propertiesToDisplay = array_values($columns);
+            if (true === $useCrossColumns) {
+                foreach ($propertiesToDisplay as $k => $col) {
+                    if (array_key_exists($col, $colToCross)) {
+                        $propertiesToDisplay[$k] = $colToCross[$col];
+                    }
+                }
+            }
             if (true === $useCheckboxColumn) {
                 array_unshift($propertiesToDisplay, $columnCheckboxName);
             }
@@ -491,7 +498,6 @@ class ListConfigGenerator extends BaseConfigGenerator
 
 
             $rowsRendererTypes = array_merge($rowsRendererTypes, $fkCrossColumnRenderTypes);
-
 
 
             if ($rowsRendererTypes) {
