@@ -50,7 +50,7 @@ Returns void.
 
 Source Code
 ===========
-See the source code for method [LightRealGeneratorService::onGenerateAfter](https://github.com/lingtalfi/Light_RealGenerator/blob/master/Service/LightRealGeneratorService.php#L295-L298)
+See the source code for method [LightRealGeneratorService::onGenerateAfter](https://github.com/lingtalfi/Light_RealGenerator/blob/master/Service/LightRealGeneratorService.php#L299-L302)
 
 
 See Also

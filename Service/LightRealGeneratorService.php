@@ -108,7 +108,11 @@ class LightRealGeneratorService
         $genConf = $conf;
 
 
-        // replacing variables now
+
+
+        //--------------------------------------------
+        // VARIABLE REPLACEMENT
+        //--------------------------------------------
         $variables = $genConf['variables'] ?? [];
 
 
@@ -116,7 +120,7 @@ class LightRealGeneratorService
 
 
             if (false === is_array($value)) {
-                if (preg_match_all('!\{\$([a-zA-Z0-9_]*)\}!', $value, $matches)) {
+                if (preg_match_all('!\{\!([a-zA-Z0-9_]*)\}!', $value, $matches)) {
 
                     $varNames = $matches[1];
                     $ret = $value;
@@ -127,12 +131,12 @@ class LightRealGeneratorService
                             $newValue = $variables[$varName];
                             if (true === $isValue) {
                                 if (true === is_scalar($newValue)) {
-                                    $ret = str_replace('{$' . $varName . '}', $newValue, $ret);
+                                    $ret = str_replace('{!' . $varName . '}', $newValue, $ret);
                                 } else {
                                     $ret = $newValue;
                                 }
                             } else {
-                                $ret = str_replace('{$' . $varName . '}', $newValue, $ret);
+                                $ret = str_replace('{!' . $varName . '}', $newValue, $ret);
                             }
                         }
                     }

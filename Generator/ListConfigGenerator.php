@@ -402,6 +402,7 @@ class ListConfigGenerator extends BaseConfigGenerator
                     'action_id' => "realist-edit_rows",
                     'text' => "Edit",
                     'icon' => "fas fa-edit",
+                    'realform_id' => '{$plugin}:generated/{$table}.byml',
                 ],
                 [
                     'text' => "Share",

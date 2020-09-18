@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.31.5 -- 2020-09-18
+
+    - update variable system, now uses the exclamation mark instead of dollar, to avoid conflict with Light_Nugget var system
+    
 - 1.31.4 -- 2020-09-18
 
     - re-enabling form multiplier trick
