@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.31.6 -- 2020-09-18
+
+    - update ListConfigGenerator, now uses _vars system as well
+
 - 1.31.5 -- 2020-09-18
 
     - update variable system, now uses the exclamation mark instead of dollar, to avoid conflict with Light_Nugget var system

@@ -80,15 +80,11 @@ class ListConfigGenerator extends BaseConfigGenerator
 
         $main = [];
 
-        $main['_vars'] = [
-            "table" => $table,
-        ];
 
-        $duelist = [];
-        $duelist['table'] = '{$table}';
 
 
         $pluginName = $this->getKeyValue('plugin_name');
+
 
         // lka is quite popular...
         $actionHandlerClass = $this->getKeyValue('list.action_handler_class', false, 'Ling\Light_Kit_Admin\Realist\ListActionHandler\LightKitAdminListActionHandler');
@@ -121,6 +117,21 @@ class ListConfigGenerator extends BaseConfigGenerator
         $relatedLinks = $this->getKeyValue("list.related_links", false, []);
         $listTitle = $this->getKeyValue("list.title", false, "{Label} list");
         $queryErrorShowDebugInfo = $this->getKeyValue("list.query_error_show_debug_info", false, false);
+
+
+
+
+
+
+        $main['_vars'] = [
+            "table" => $table,
+            "plugin" => $pluginName,
+        ];
+
+        $duelist = [];
+        $duelist['table'] = '{$table}';
+
+
 
 
         $ignoreColumns = array_unique(array_merge($globalIgnoreColumns, $ignoreColumns));
@@ -243,7 +254,7 @@ class ListConfigGenerator extends BaseConfigGenerator
                             $rfCol => $fk,
                         ],
                         "url_params" => [
-                            'plugin' => $crossColumnPluginName,
+                            'plugin' => '{$plugin}',
                             'controller' => str_replace([
                                 '{Table}',
                             ], [

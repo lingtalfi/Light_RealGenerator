@@ -67,7 +67,7 @@ Exceptions thrown
 
 Source Code
 ===========
-See the source code for method [ListConfigGenerator::toOpenAdminDataTypes](https://github.com/lingtalfi/Light_RealGenerator/blob/master/Generator/ListConfigGenerator.php#L577-L589)
+See the source code for method [ListConfigGenerator::toOpenAdminDataTypes](https://github.com/lingtalfi/Light_RealGenerator/blob/master/Generator/ListConfigGenerator.php#L588-L600)
 
 
 See Also
