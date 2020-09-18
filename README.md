@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.31.7 -- 2020-09-18
+
+    - update config example
+    
 - 1.31.6 -- 2020-09-18
 
     - update ListConfigGenerator, now uses _vars system as well

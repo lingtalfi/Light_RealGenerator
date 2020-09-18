@@ -1,6 +1,6 @@
 The configuration block
 --------------
-2019-10-24 -> 2020-09-03
+2019-10-24 -> 2020-09-18
 
 
 A configuration block is an array.
@@ -10,6 +10,13 @@ Below is it's babyYaml form, commented, which serves as the reference documentat
 
 
 ```yaml
+
+# Use this to define your custom variables that you can re-use later in this same configuration.
+# To use a variable you've defined here, use the {!variableName} notation
+variables: 
+    plugin: Light_Kit_Admin
+
+
 # This is optional. Under the hood, the real generator uses the Light_Database plugin to interact with the database,
 # and so the default value will be the one defined by the Light_Database plugin.
 ?database_name: jindemo
@@ -19,7 +26,8 @@ Below is it's babyYaml form, commented, which serves as the reference documentat
 # - as a prefix of the rendering.list_action_groups.action_id (list)
 # - as the plugin name in rendering.list_renderer.identifier (list)
 # - as the plugin name in plugin (described in the miscellaneous "section" of the realist conception notes)
-plugin_name: Light_Kit_Admin
+# - as the micro permission plugin name for the on_success_handler (form) of type database
+plugin_name: {!plugin}
 
 # The path to a create file, see the use_create_file directive for more info
 # The {app_dir} tag will be replaced with the absolute path to the application directory.
@@ -92,7 +100,7 @@ list:
     # The target_dir is the path of the dir where to generate the files
     # It's an absolute path.
     # The tag {app_dir} can be used, and will be replaced with the actual "application root directory".
-    target_dir: {app_dir}/config/data/Light_Kit_Admin/Light_Realist/list/generated
+    target_dir: {app_dir}/config/data/{!plugin}/Light_Realist/list/generated
 
 
     # the base name of the files to generate
@@ -297,7 +305,7 @@ form:
     # The target_dir is the path of the dir where to generate the files
     # It's an absolute path.
     # The tag {app_dir} can be used, and will be replaced with the actual "application root directory".
-    target_dir: {app_dir}/config/data/Light_Kit_Admin/Light_Realform//form/generated
+    target_dir: {app_dir}/config/data/{!plugin}/Light_Realform//form/generated
 
 
     # This array let you ignore/skip columns that you want to exclude from the generated form config file.
