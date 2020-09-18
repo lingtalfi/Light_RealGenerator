@@ -1,6 +1,6 @@
 Light_RealGenerator
 ===========
-2019-10-24 -> 2020-09-17
+2019-10-24 -> 2020-09-18
 
 
 
@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.31.4 -- 2020-09-18
+
+    - re-enabling form multiplier trick
+    
 - 1.31.3 -- 2020-09-17
 
     - fix ListConfigGenerator not showing cross columns properly

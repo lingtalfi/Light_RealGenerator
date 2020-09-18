@@ -197,30 +197,29 @@ class FormConfigGenerator extends BaseConfigGenerator
                     ];
 
 
-                    /**
-                     * temporarily disabled while developing new api, should implement it back after...
-                     */
-//                    if (true === $useMultiplierOnHas && $isHasTable) {
-//
-//                        /**
-//                         * We consider that the first member of the ricStrict is a fk to the left table,
-//                         * and the second member (aka multiplier column) is the fk to the right table.
-//                         * Note: this is a rather simplistic approach that assumes that the primary key is
-//                         * composed of only two foreign keys.
-//                         *
-//                         * We might need to upgrade this technique later as the need for more complex db schemas occurs.
-//                         *
-//                         */
-//                        $isPivot = ($ricStrict[0] === $col);
-//
-//                        if (false === $isPivot) {
-//                            $specialItem['mode'] = 'multiplier';
-//                            $specialItem['multiplier'] = [
-//                                "insert_mode" => "insert",
-//                                "multiplier_column" => $col,
-//                            ];
-//                        }
-//                    }
+
+                    if (true === $useMultiplierOnHas && $isHasTable) {
+
+                        /**
+                         * We consider that the first member of the ricStrict is a fk to the left table,
+                         * and the second member (aka multiplier column) is the fk to the right table.
+                         * Note: this is a rather simplistic approach that assumes that the primary key is
+                         * composed of only two foreign keys.
+                         *
+                         * We might need to upgrade this technique later as the need for more complex db schemas occurs.
+                         *
+                         */
+                        $isPivot = ($ricStrict[0] === $col);
+
+                        if (false === $isPivot) {
+                            $specialItem['mode'] = 'multiplier';
+                            $specialItem['multiplier'] = [
+                                "enabled" => true,
+                                "pivot" => $ricStrict[0],
+                            ];
+                        }
+
+                    }
                 }
 
 
@@ -279,25 +278,6 @@ class FormConfigGenerator extends BaseConfigGenerator
                 $onSuccessHandlerArr = [
                     "class" => "defaultDbHandler",
                 ];
-
-
-                /**
-                 * temporarily disabled while developing new api, should be implemented back after...
-                 */
-//                if (true === $useMultiplierOnHas && true === $isHasTable) {
-//                    if (2 === count($ricStrict)) {
-//                        list($leftCol, $rightCol) = $ricStrict;
-//                        $onSuccessHandlerArr['params']['multiplier'] = [
-//                            'column' => $rightCol,
-//                            'update_cleaner_column' => $leftCol,
-//                        ];
-//                    } else {
-//                        $sRic = ArrayToStringTool::toInlinePhpArray($ricStrict);
-//                        throw new LightRealGeneratorException("Don't know how to handle this ric strict with nbEntries!=2 for the multiplier: $sRic.");
-//                    }
-//                }
-
-
                 break;
             default:
                 throw new LightRealGeneratorException("Unknown success handler type: $onSuccessHandlerType.");
