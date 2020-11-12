@@ -1,6 +1,6 @@
 Light Real Generator
 ================
-2019-10-23 -> 2020-09-18
+2019-10-23 -> 2020-09-24
 
 
 
@@ -91,7 +91,7 @@ column, but, I digress.
 
 The variables system
 ------------
-2020-02-26 -> 2020-09-18
+2020-02-26 -> 2020-09-24
 
 The **variables** system lets you declare some custom variables, and inject them wherever you want in the configuration file.
 
@@ -124,7 +124,7 @@ variables:
 
 # ...
 list:
-    target_dir: {app_dir}/config/data/{!plugin}/Light_Realist/generated
+    target_dir: {app_dir}/config/data/!{plugin}/Light_Realist/generated
 # ...
 
 ```
@@ -138,7 +138,7 @@ You can also replace a key of an array by a variable, like this:
 
 # ...
 list:
-    {!myKey}: judo 
+    !{myKey}: judo 
 # ...
 
 ```

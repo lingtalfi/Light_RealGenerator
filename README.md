@@ -1,6 +1,6 @@
 Light_RealGenerator
 ===========
-2019-10-24 -> 2020-09-18
+2019-10-24 -> 2020-11-12
 
 
 
@@ -98,6 +98,13 @@ Related
 History Log
 =============
 
+- 1.31.8 -- 2020-11-12
+
+    - update config, adapt new Light_Nugget variable replacement system
+    - update config, include rendering section
+    - update FormConfigGenerator, now generates inline tableListConf
+    - update RepresentativeColumnFinderUtil->method, now uses the first varchar col instead of the first str col as the representative
+    
 - 1.31.7 -- 2020-09-18
 
     - update config example

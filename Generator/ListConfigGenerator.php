@@ -81,8 +81,6 @@ class ListConfigGenerator extends BaseConfigGenerator
         $main = [];
 
 
-
-
         $pluginName = $this->getKeyValue('plugin_name');
 
 
@@ -119,19 +117,13 @@ class ListConfigGenerator extends BaseConfigGenerator
         $queryErrorShowDebugInfo = $this->getKeyValue("list.query_error_show_debug_info", false, false);
 
 
-
-
-
-
         $main['_vars'] = [
             "table" => $table,
             "plugin" => $pluginName,
         ];
 
         $duelist = [];
-        $duelist['table'] = '{$table}';
-
-
+        $duelist['table'] = '%{table}';
 
 
         $ignoreColumns = array_unique(array_merge($globalIgnoreColumns, $ignoreColumns));
@@ -187,6 +179,9 @@ class ListConfigGenerator extends BaseConfigGenerator
                     $crossColumnAlias = $this->findRepresentativeColumnAlias($fk);
 
                     $representativeCol = $reprFinder->findRepresentativeColumn($rfTable);
+
+
+
                     $fkToRepresentative[$fk] = $representativeCol;
                     $rfTableAlias = $this->findAlias($rfTable);
                     $tableToAlias[$rfDb . '.' . $rfTable] = $rfTableAlias;
@@ -254,7 +249,7 @@ class ListConfigGenerator extends BaseConfigGenerator
                             $rfCol => $fk,
                         ],
                         "url_params" => [
-                            'plugin' => '{$plugin}',
+                            'plugin' => '%{plugin}',
                             'controller' => str_replace([
                                 '{Table}',
                             ], [
@@ -413,7 +408,7 @@ class ListConfigGenerator extends BaseConfigGenerator
                     'action_id' => "realist-edit_rows",
                     'text' => "Edit",
                     'icon' => "fas fa-edit",
-                    'realform_id' => '{$plugin}:generated/{$table}.byml',
+                    'realform_id' => '%{plugin}:generated/%{table}',
                 ],
                 [
                     'text' => "Share",

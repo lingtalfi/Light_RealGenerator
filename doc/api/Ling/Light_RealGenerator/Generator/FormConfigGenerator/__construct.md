@@ -46,7 +46,7 @@ Returns void.
 
 Source Code
 ===========
-See the source code for method [FormConfigGenerator::__construct](https://github.com/lingtalfi/Light_RealGenerator/blob/master/Generator/FormConfigGenerator.php#L35-L39)
+See the source code for method [FormConfigGenerator::__construct](https://github.com/lingtalfi/Light_RealGenerator/blob/master/Generator/FormConfigGenerator.php#L72-L78)
 
 
 See Also

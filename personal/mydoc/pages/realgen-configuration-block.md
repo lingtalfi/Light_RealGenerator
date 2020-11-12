@@ -1,6 +1,6 @@
 The configuration block
 --------------
-2019-10-24 -> 2020-09-18
+2019-10-24 -> 2020-09-24
 
 
 A configuration block is an array.
@@ -12,7 +12,7 @@ Below is it's babyYaml form, commented, which serves as the reference documentat
 ```yaml
 
 # Use this to define your custom variables that you can re-use later in this same configuration.
-# To use a variable you've defined here, use the {!variableName} notation
+# To use a variable you've defined here, use the !{variableName} notation
 variables: 
     plugin: Light_Kit_Admin
 
@@ -27,7 +27,7 @@ variables:
 # - as the plugin name in rendering.list_renderer.identifier (list)
 # - as the plugin name in plugin (described in the miscellaneous "section" of the realist conception notes)
 # - as the micro permission plugin name for the on_success_handler (form) of type database
-plugin_name: {!plugin}
+plugin_name: !{plugin}
 
 # The path to a create file, see the use_create_file directive for more info
 # The {app_dir} tag will be replaced with the absolute path to the application directory.
@@ -100,7 +100,7 @@ list:
     # The target_dir is the path of the dir where to generate the files
     # It's an absolute path.
     # The tag {app_dir} can be used, and will be replaced with the actual "application root directory".
-    target_dir: {app_dir}/config/data/{!plugin}/Light_Realist/list/generated
+    target_dir: {app_dir}/config/data/!{plugin}/Light_Realist/list/generated
 
 
     # the base name of the files to generate
@@ -287,12 +287,6 @@ form:
     title: {Label} form
 
 
-
-    # Whether to create a link to the corresponding list.
-    # The default value is true.
-    # This property is provided by Light_Kit_Admin_Generator (i.e. not in Light_RealGenerator).
-    use_link_to_list: true
-
     # The security array. See the [baked in security system of Light_Nugget](https://github.com/lingtalfi/Light_Nugget/blob/master/doc/pages/conception-notes.md#a-baked-in-security-system-for-nugget-users) for more details.
     security:
         any:
@@ -305,7 +299,7 @@ form:
     # The target_dir is the path of the dir where to generate the files
     # It's an absolute path.
     # The tag {app_dir} can be used, and will be replaced with the actual "application root directory".
-    target_dir: {app_dir}/config/data/{!plugin}/Light_Realform//form/generated
+    target_dir: {app_dir}/config/data/!{plugin}/Light_Realform/form/generated
 
 
     # This array let you ignore/skip columns that you want to exclude from the generated form config file.
@@ -412,7 +406,14 @@ form:
     use_multiplier_on_has: true
 
 
-
+    # An array of related links to add as the rendering.related_links property in all the generated form conf.
+    # The default value is an empty array, but a practical value to use is the array below.
+    # In the property values, you can use the generic tags (described in the list section comment).
+    related_links:
+        -
+            text: See the list of "{Label}" items
+            url: (::ROUTE::)lch_route-hub::{plugin: !{plugin}, controller: Generated/{TableClass}Controller}
+            icon: fas fa-plus-circle
 
 ```
 

@@ -7,6 +7,7 @@ namespace Ling\Light_RealGenerator\Service;
 use Ling\BabyYaml\BabyYamlUtil;
 use Ling\Bat\ArrayTool;
 use Ling\Bat\BDotTool;
+use Ling\CheapLogger\CheapLogger;
 use Ling\Light\ServiceContainer\LightServiceContainerInterface;
 use Ling\Light_Logger\LightLoggerService;
 use Ling\Light_RealGenerator\Exception\LightRealGeneratorException;
@@ -108,8 +109,6 @@ class LightRealGeneratorService
         $genConf = $conf;
 
 
-
-
         //--------------------------------------------
         // VARIABLE REPLACEMENT
         //--------------------------------------------
@@ -120,7 +119,7 @@ class LightRealGeneratorService
 
 
             if (false === is_array($value)) {
-                if (preg_match_all('!\{\!([a-zA-Z0-9_]*)\}!', $value, $matches)) {
+                if (preg_match_all('!\!\{([a-zA-Z0-9_]*)\}!', $value, $matches)) {
 
                     $varNames = $matches[1];
                     $ret = $value;
@@ -131,12 +130,12 @@ class LightRealGeneratorService
                             $newValue = $variables[$varName];
                             if (true === $isValue) {
                                 if (true === is_scalar($newValue)) {
-                                    $ret = str_replace('{!' . $varName . '}', $newValue, $ret);
+                                    $ret = str_replace('!{' . $varName . '}', $newValue, $ret);
                                 } else {
                                     $ret = $newValue;
                                 }
                             } else {
-                                $ret = str_replace('{!' . $varName . '}', $newValue, $ret);
+                                $ret = str_replace('!{' . $varName . '}', $newValue, $ret);
                             }
                         }
                     }
@@ -237,9 +236,10 @@ class LightRealGeneratorService
      */
     public function debugLog(string $msg)
     {
-        $useDebug = $this->options['useDebug'] ?? false;
-        if (true === $useDebug) {
 
+        $useDebug = $this->options['useDebug'] ?? false;
+
+        if (true === $useDebug) {
             /**
              * @var $logger LightLoggerService
              */

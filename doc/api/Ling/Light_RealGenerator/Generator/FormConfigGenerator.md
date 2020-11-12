@@ -4,7 +4,7 @@
 
 The FormConfigGenerator class
 ================
-2019-10-24 --> 2020-09-18
+2019-10-24 --> 2020-11-12
 
 
 
@@ -26,6 +26,8 @@ class <span class="pl-k">FormConfigGenerator</span> extends [BaseConfigGenerator
 
 - Properties
     - private array [$tableListIdentifiers](#property-tableListIdentifiers) ;
+    - private string [$tableListMode](#property-tableListMode) ;
+    - private [Ling\Light_RealGenerator\Util\RepresentativeColumnFinderUtil](https://github.com/lingtalfi/Light_RealGenerator/blob/master/doc/api/Ling/Light_RealGenerator/Util/RepresentativeColumnFinderUtil.md) [$representativeColumnFinder](#property-representativeColumnFinder) ;
 
 - Inherited properties
     - protected [Ling\Light\ServiceContainer\LightServiceContainerInterface](https://github.com/lingtalfi/Light/blob/master/doc/api/Ling/Light/ServiceContainer/LightServiceContainerInterface.md) [BaseConfigGenerator::$container](#property-container) ;
@@ -38,6 +40,7 @@ class <span class="pl-k">FormConfigGenerator</span> extends [BaseConfigGenerator
     - protected [getFileContent](https://github.com/lingtalfi/Light_RealGenerator/blob/master/doc/api/Ling/Light_RealGenerator/Generator/FormConfigGenerator/getFileContent.md)(string $table) : string
     - protected [getFieldType](https://github.com/lingtalfi/Light_RealGenerator/blob/master/doc/api/Ling/Light_RealGenerator/Generator/FormConfigGenerator/getFieldType.md)(string $type) : string
     - protected [generateContentByTables](https://github.com/lingtalfi/Light_RealGenerator/blob/master/doc/api/Ling/Light_RealGenerator/Generator/FormConfigGenerator/generateContentByTables.md)(array $tables) : void
+    - private [getTableListConf](https://github.com/lingtalfi/Light_RealGenerator/blob/master/doc/api/Ling/Light_RealGenerator/Generator/FormConfigGenerator/getTableListConf.md)(array $fkInfo) : array
 
 - Inherited methods
     - public [BaseConfigGenerator::setContainer](https://github.com/lingtalfi/Light_RealGenerator/blob/master/doc/api/Ling/Light_RealGenerator/Generator/BaseConfigGenerator/setContainer.md)([Ling\Light\ServiceContainer\LightServiceContainerInterface](https://github.com/lingtalfi/Light/blob/master/doc/api/Ling/Light/ServiceContainer/LightServiceContainerInterface.md) $container) : void
@@ -72,6 +75,34 @@ Properties
     
     
 
+- <span id="property-tableListMode"><b>tableListMode</b></span>
+
+    This property holds the tableListMode for this instance.
+    Defines how we'll generate the tableList type.
+    
+    
+    Possible values are:
+    - tableListIdentifier
+    - tableListDirectiveId
+    
+    (more info in tableList conception notes)
+    
+    
+    Default and recommended value is tableListDirectiveId, since all the configuration is gathered
+    in the same place, whereas with tableListIdentifier, you've got configuration split
+    into different files (not practical from the user's perspective).
+    
+    "tableListIdentifier" was the old mode.
+    
+    
+
+- <span id="property-representativeColumnFinder"><b>representativeColumnFinder</b></span>
+
+    This property holds the representativeColumnFinder for this instance.
+    Just a cache.
+    
+    
+
 - <span id="property-container"><b>container</b></span>
 
     This property holds the container for this instance.
@@ -101,6 +132,7 @@ Methods
 - [FormConfigGenerator::getFileContent](https://github.com/lingtalfi/Light_RealGenerator/blob/master/doc/api/Ling/Light_RealGenerator/Generator/FormConfigGenerator/getFileContent.md) &ndash; Returns the content of the config file for the given table.
 - [FormConfigGenerator::getFieldType](https://github.com/lingtalfi/Light_RealGenerator/blob/master/doc/api/Ling/Light_RealGenerator/Generator/FormConfigGenerator/getFieldType.md) &ndash; Returns the field type for the given sql type.
 - [FormConfigGenerator::generateContentByTables](https://github.com/lingtalfi/Light_RealGenerator/blob/master/doc/api/Ling/Light_RealGenerator/Generator/FormConfigGenerator/generateContentByTables.md) &ndash; Generate some content that applies to the whole table selection rather than on each individual tables.
+- [FormConfigGenerator::getTableListConf](https://github.com/lingtalfi/Light_RealGenerator/blob/master/doc/api/Ling/Light_RealGenerator/Generator/FormConfigGenerator/getTableListConf.md) &ndash; Returns a configuration array based on the given fkInfo array.
 - [BaseConfigGenerator::setContainer](https://github.com/lingtalfi/Light_RealGenerator/blob/master/doc/api/Ling/Light_RealGenerator/Generator/BaseConfigGenerator/setContainer.md) &ndash; Sets the container.
 - [BaseConfigGenerator::setDebugCallable](https://github.com/lingtalfi/Light_RealGenerator/blob/master/doc/api/Ling/Light_RealGenerator/Generator/BaseConfigGenerator/setDebugCallable.md) &ndash; Sets the debugCallable.
 - [BaseConfigGenerator::debugLog](https://github.com/lingtalfi/Light_RealGenerator/blob/master/doc/api/Ling/Light_RealGenerator/Generator/BaseConfigGenerator/debugLog.md) &ndash; Calls the debugCallable function if set.
