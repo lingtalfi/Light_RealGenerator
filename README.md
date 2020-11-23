@@ -1,6 +1,6 @@
 Light_RealGenerator
 ===========
-2019-10-24 -> 2020-11-12
+2019-10-24 -> 2020-11-23
 
 
 
@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.31.9 -- 2020-11-23
+
+    - update generated config, now adds planetId if galaxyName defined in variables
+    
 - 1.31.8 -- 2020-11-12
 
     - update config, adapt new Light_Nugget variable replacement system

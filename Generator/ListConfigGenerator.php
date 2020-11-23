@@ -38,6 +38,7 @@ class ListConfigGenerator extends BaseConfigGenerator
      */
     public function generate(array $config)
     {
+
         $this->setConfig($config);
         $tables = $this->getTables();
 
@@ -122,6 +123,13 @@ class ListConfigGenerator extends BaseConfigGenerator
             "plugin" => $pluginName,
         ];
 
+
+        $varArray = $this->getKeyValue("variables", false, []);
+        if (array_key_exists("galaxyName", $varArray)) {
+            $main['planetId'] = '%{galaxyName}/%{plugin}';
+        }
+
+
         $duelist = [];
         $duelist['table'] = '%{table}';
 
@@ -179,7 +187,6 @@ class ListConfigGenerator extends BaseConfigGenerator
                     $crossColumnAlias = $this->findRepresentativeColumnAlias($fk);
 
                     $representativeCol = $reprFinder->findRepresentativeColumn($rfTable);
-
 
 
                     $fkToRepresentative[$fk] = $representativeCol;
