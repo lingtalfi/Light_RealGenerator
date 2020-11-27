@@ -1,6 +1,6 @@
 Light_RealGenerator
 ===========
-2019-10-24 -> 2020-11-23
+2019-10-24 -> 2020-11-27
 
 
 
@@ -98,6 +98,10 @@ Related
 History Log
 =============
 
+- 1.31.10 -- 2020-11-27
+
+    - fix generated config, now nullable field depends on column nullability
+    
 - 1.31.9 -- 2020-11-23
 
     - update generated config, now adds planetId if galaxyName defined in variables
