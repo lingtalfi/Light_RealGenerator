@@ -1,6 +1,6 @@
 Light_RealGenerator
 ===========
-2019-10-24 -> 2020-11-27
+2019-10-24 -> 2020-12-01
 
 
 
@@ -98,6 +98,11 @@ Related
 History Log
 =============
 
+
+- 1.31.11 -- 2020-12-01
+
+    - add internal ListConfigGenerator->getCrossColumnPluginName method
+    
 - 1.31.10 -- 2020-11-27
 
     - fix generated config, now nullable field depends on column nullability
