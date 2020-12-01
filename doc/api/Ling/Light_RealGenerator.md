@@ -45,7 +45,6 @@ Dependencies
 - [SqlWizard](https://github.com/lingtalfi/SqlWizard)
 - [ArrayVariableResolver](https://github.com/lingtalfi/ArrayVariableResolver)
 - [BabyYaml](https://github.com/lingtalfi/BabyYaml)
-- [CheapLogger](https://github.com/lingtalfi/CheapLogger)
 - [Light_Logger](https://github.com/lingtalfi/Light_Logger)
 
 

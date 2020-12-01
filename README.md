@@ -99,6 +99,10 @@ History Log
 =============
 
 
+- 1.31.12 -- 2020-12-01
+
+    - add internal LightRealGeneratorService->getNewListConfigGeneratorInstance method
+    
 - 1.31.11 -- 2020-12-01
 
     - add internal ListConfigGenerator->getCrossColumnPluginName method
