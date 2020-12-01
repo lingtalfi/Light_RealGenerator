@@ -58,7 +58,7 @@ Exceptions thrown
 
 Source Code
 ===========
-See the source code for method [ListConfigGenerator::createColumnLabels](https://github.com/lingtalfi/Light_RealGenerator/blob/master/Generator/ListConfigGenerator.php#L671-L689)
+See the source code for method [ListConfigGenerator::createColumnLabels](https://github.com/lingtalfi/Light_RealGenerator/blob/master/Generator/ListConfigGenerator.php#L674-L692)
 
 
 See Also

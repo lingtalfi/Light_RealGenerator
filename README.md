@@ -98,7 +98,11 @@ Related
 History Log
 =============
 
+    
+- 1.31.13 -- 2020-12-01
 
+    - update ListConfigGenerator->getCrossColumnPluginName, now returns the planetId by default
+    
 - 1.31.12 -- 2020-12-01
 
     - add internal LightRealGeneratorService->getNewListConfigGeneratorInstance method

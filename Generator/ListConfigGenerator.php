@@ -580,7 +580,10 @@ class ListConfigGenerator extends BaseConfigGenerator
      */
     protected function getCrossColumnPluginName(string $pluginName, $rfTable, $crossColumnHubLinkTablePrefix2Plugin): string
     {
-        $crossColumnPluginName = $pluginName;
+        $galaxy = $this->getKeyValue("variables.galaxyName", false, 'Ling');
+
+        $crossColumnPluginName = $galaxy . "/" . $pluginName;
+
         $fkTablePrefix = SqlWizardGeneralTool::getTablePrefix($rfTable);
         if (null !== $fkTablePrefix && array_key_exists($fkTablePrefix, $crossColumnHubLinkTablePrefix2Plugin)) {
             $crossColumnPluginName = $crossColumnHubLinkTablePrefix2Plugin[$fkTablePrefix];

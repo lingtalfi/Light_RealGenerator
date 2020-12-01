@@ -57,7 +57,7 @@ Returns string.
 
 Source Code
 ===========
-See the source code for method [ListConfigGenerator::getCrossColumnPluginName](https://github.com/lingtalfi/Light_RealGenerator/blob/master/Generator/ListConfigGenerator.php#L581-L589)
+See the source code for method [ListConfigGenerator::getCrossColumnPluginName](https://github.com/lingtalfi/Light_RealGenerator/blob/master/Generator/ListConfigGenerator.php#L581-L592)
 
 
 See Also
