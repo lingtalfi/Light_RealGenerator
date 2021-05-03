@@ -104,6 +104,10 @@ History Log
 =============
 
 
+- 1.31.19 -- 2021-05-03
+
+    - Update dependencies to Ling.Light_Logger (pushed by SubscribersUtil)
+
 - 1.31.18 -- 2021-05-03
 
     - Update dependencies to Ling.Light_Logger (pushed by SubscribersUtil)
