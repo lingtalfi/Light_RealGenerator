@@ -104,6 +104,10 @@ History Log
 =============
 
 
+- 1.31.22 -- 2021-06-17
+
+    - update realgen configuration block example
+  
 - 1.31.21 -- 2021-06-17
 
     - update ListConfigGenerator to use modern Light_Controller links (with execute)
