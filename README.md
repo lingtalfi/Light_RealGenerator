@@ -1,6 +1,6 @@
 Light_RealGenerator
 ===========
-2019-10-24 -> 2021-03-15
+2019-10-24 -> 2021-06-17
 
 
 
@@ -103,6 +103,10 @@ Related
 History Log
 =============
 
+
+- 1.31.21 -- 2021-06-17
+
+    - update ListConfigGenerator to use modern Light_Controller links (with execute)
 
 - 1.31.20 -- 2021-05-31
 
