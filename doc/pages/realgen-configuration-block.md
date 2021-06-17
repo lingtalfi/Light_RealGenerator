@@ -413,7 +413,7 @@ form:
     related_links:
         -
             text: See the list of "{Label}" items
-            url: ::(@reverse_router->getUrl(lch_route-hub, {execute: !{galaxy}\!{plugin}\Controller\Generated\{TableClass}Controller->renderList}))::
+            url: ::(@reverse_router->getUrl(lch_route-hub, {execute: !{galaxy}\!{plugin}\Controller\Generated\{TableClass}Controller->render}))::
             icon: fas fa-plus-circle
 
 ```

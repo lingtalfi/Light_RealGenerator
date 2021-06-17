@@ -249,7 +249,7 @@ class ListConfigGenerator extends BaseConfigGenerator
                         ], [
                             $rfTablePascalCase,
                         ], $crossColumnHubLinkControllerFormat);
-                    $executeStr .= "->renderList";
+                    $executeStr .= "->render";
                     $executeStr = str_replace("/", "\\", $executeStr);
 
 

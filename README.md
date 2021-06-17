@@ -104,6 +104,10 @@ History Log
 =============
 
 
+- 1.31.23 -- 2021-06-17
+
+    - fix typo (renderList instead of render)
+  
 - 1.31.22 -- 2021-06-17
 
     - update realgen configuration block example
