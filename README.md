@@ -1,6 +1,6 @@
 Light_RealGenerator
 ===========
-2019-10-24 -> 2021-06-17
+2019-10-24 -> 2021-06-25
 
 
 
@@ -62,20 +62,6 @@ real_generator:
             container: @container()
 
 
-# --------------------------------------
-# hooks
-# --------------------------------------
-$logger.methods_collection:
-    -
-        method: addListener
-        args:
-            channels: real_generator.debug
-            listener:
-                instance: Ling\Light_Logger\Listener\LightCleanableFileLoggerListener
-                methods:
-                    configure:
-                        options:
-                            file: ${app_dir}/log/real_generator_debug.txt
 ```
 
 
@@ -104,6 +90,10 @@ History Log
 =============
 
 
+- 1.31.24 -- 2021-06-25
+
+    - update api, now use Ling.Light_Logger open registration system
+  
 - 1.31.23 -- 2021-06-17
 
     - fix typo (renderList instead of render)
