@@ -1,6 +1,6 @@
 Light_RealGenerator
 ===========
-2019-10-24 -> 2021-06-25
+2019-10-24 -> 2021-06-28
 
 
 
@@ -90,6 +90,10 @@ History Log
 =============
 
 
+- 1.31.25 -- 2021-06-28
+
+    - fix api wrong reference to Ling.Light_Logger
+  
 - 1.31.24 -- 2021-06-25
 
     - update api, now use Ling.Light_Logger open registration system
